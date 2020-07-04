@@ -40,6 +40,6 @@ object DataConstant {
     const val DATA_username = "username"
 
 
-
+    const val NULL_DATA = "nullData"
 
 }

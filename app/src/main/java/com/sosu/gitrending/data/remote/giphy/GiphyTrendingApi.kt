@@ -14,5 +14,6 @@ interface GiphyTrendingApi {
 
     @GET(END_POINT_GET_GIHPY_TRENDINGS)
     fun getTrendings(
+        // todo
     ): Observable<GiphyApiBaseRes<List<GiphyGif>>>
 }
