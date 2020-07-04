@@ -5,12 +5,15 @@ import com.sosu.gitrending.BR
 import com.sosu.gitrending.R
 import com.sosu.gitrending.databinding.ActivitySplashBinding
 import com.sosu.gitrending.ui.base.BaseActivity
+import com.sosu.gitrending.usecase.ui.StartActivityImpl
 import javax.inject.Inject
 
 /**
  * Created by hyunsuso on 2020/07/04.
  */
-class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), SplashNavigator{
+class SplashActivity
+    : BaseActivity<ActivitySplashBinding, SplashViewModel>()
+    , SplashNavigator {
 
     companion object{
         val TAG = SplashActivity::class.java.simpleName
@@ -19,6 +22,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), S
     private val splashViewModel by lazy {
         ViewModelProvider(this, viewModelFactory).get(SplashViewModel::class.java)
     }
+
+    @Inject lateinit var startActivityImpl: StartActivityImpl
 
     override fun getName(): String {
         return TAG
@@ -49,7 +54,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), S
     }
 
     override fun openMainActivity() {
-        // todo open main activity
+        startActivity(startActivityImpl.openMainActivity())
     }
 
 }
