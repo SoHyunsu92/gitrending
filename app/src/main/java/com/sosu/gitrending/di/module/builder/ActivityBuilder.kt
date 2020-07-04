@@ -1,6 +1,6 @@
 package com.sosu.gitrending.di.module.builder
 
-import com.sosu.gitrending.MainActivity
+import com.sosu.gitrending.ui.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

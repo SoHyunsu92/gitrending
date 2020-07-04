@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sosu.gitrending.di.viewmodel.ViewModelFactory
 import com.sosu.gitrending.di.viewmodel.ViewModelKey
+import com.sosu.gitrending.ui.main.MainViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -17,7 +18,10 @@ abstract class ViewModelBuilder {
     /**
      * Binding ViewModel
      * ViewModelFactory key 로 ViewModelKey(ViewModel::class) 사용     */
-    // @memo 
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
 
     /*
     * Binds ViewModels factory to provide ViewModels
