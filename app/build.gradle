@@ -34,6 +34,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        dev {
+            dimension "version"
+            applicationId "com.sosu.devgitrending"
+            manifestPlaceholders = [
+                    appName: "DevGitrending",
+            ]
+        }
+
+        prod {
+            dimension "version"
+            applicationId "com.sosu.gitrending"
+            manifestPlaceholders = [
+                    appName: "Gitrending",
+            ]
+        }
+    }
 }
 
 dependencies {
