@@ -6,6 +6,8 @@ import dagger.android.ContributesAndroidInjector
 
 /**
  * Created by hyunsuso on 2020/07/04.
+ *
+ * inject Activity
  */
 @Module
 abstract class ActivityBuilder {
