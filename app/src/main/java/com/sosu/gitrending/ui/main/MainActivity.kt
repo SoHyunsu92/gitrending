@@ -39,6 +39,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
 
     override fun initAfterBinding() {
         mainViewModel.setNavigator(this)
+
+        mainViewModel.onShowTrending()
     }
 
     // init bottom tab settings

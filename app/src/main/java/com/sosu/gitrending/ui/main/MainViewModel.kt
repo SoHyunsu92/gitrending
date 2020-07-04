@@ -9,7 +9,6 @@ import javax.inject.Inject
  * Created by hyunsuso on 2020/07/04.
  */
 class MainViewModel @Inject constructor(
-    private val gifsRepoImpl: GiphyGifsRepoImpl
 ) : BaseViewModel<MainNavigator>() {
 
     companion object {
@@ -18,10 +17,6 @@ class MainViewModel @Inject constructor(
 
     override fun getName(): String {
         return TAG
-    }
-
-    init {
-        onShowTrending()
     }
 
     fun onShowTrending(){

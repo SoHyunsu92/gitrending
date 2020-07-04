@@ -13,6 +13,7 @@ data class GiphyImageAttrs(
     @SerializedName(DataConstant.DATA_webp)          var webp : String? = "",
     @SerializedName(DataConstant.DATA_url)           var url : String? = ""
 ){
+    // todo type pair return
     fun getResUrl() : String? {
         if(url != null && url!!.isNotEmpty()){
             return url
