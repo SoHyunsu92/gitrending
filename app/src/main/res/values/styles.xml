@@ -23,6 +23,17 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextColorTPrimaryPt14B">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextColorTPrimaryPt10">
+        <item name="android:textSize">10dp</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
     <style name="TextSelectColorTPrimary_ColorTDisablePt14">
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/select_color__color_t_primary__color_t_disable</item>
