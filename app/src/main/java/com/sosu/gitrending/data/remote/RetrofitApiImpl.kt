@@ -1,6 +1,9 @@
 package com.sosu.gitrending.data.remote
 
 import com.sosu.gitrending.BuildConfig
+import com.sosu.gitrending.data.model.app.DConfig
+import com.sosu.gitrending.data.model.app.DLog
+import com.sosu.gitrending.utils.GsonUtils
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -49,13 +52,47 @@ class RetrofitApiImpl : RetrofitApi {
             .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS);
 
+        // OkHttp core <-> network
+        if(DConfig.isDebugMode()){
+            val logging = HttpLoggingInterceptor();
+            logging.level = HttpLoggingInterceptor.Level.BODY
+
+            httpClient.addInterceptor(logging)
+
+            httpClient.addNetworkInterceptor(object : Interceptor {
+                override fun intercept(chain: Interceptor.Chain): Response {
+                    val request = chain.request()
+
+                    DLog.d(TAG, "networkInterceptor= " + getResponseLog(request));
+
+                    return chain.proceed(request);
+                }
+            })
+        }
+
+        // OkHttp core <-> application
+        // init default headers
+        httpClient.addInterceptor(object : Interceptor {
+            override fun intercept(chain: Interceptor.Chain): Response {
+                val builder = chain.request().newBuilder()
+
+                for(key in addHeaders.keys){
+                    val header = addHeaders.get(key) ?: continue
+
+                    builder.addHeader(key, header)
+                }
+
+                return chain.proceed(builder.build())
+            }
+        })
+
         return httpClient.build()
     }
 
     override fun getResponseLog(request: Request): String{
         val requestMsg = request.toString()
-        val headersMsg = request.headers
-        val bodyMsg = request.body
+        val headersMsg = GsonUtils.objectToJsonString(request.headers)
+        val bodyMsg = GsonUtils.objectToJsonString(request.body)
 
         return "$requestMsg \n $headersMsg \n $bodyMsg"
     }
