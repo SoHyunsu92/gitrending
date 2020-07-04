@@ -1,4 +1,4 @@
-package com.sosu.gitrending.data.remote
+package com.sosu.gitrending.data.remote.base
 
 import okhttp3.OkHttpClient
 import okhttp3.Request

@@ -1,4 +1,4 @@
-package com.sosu.gitrending.data.remote
+package com.sosu.gitrending.data.remote.base
 
 import com.sosu.gitrending.BuildConfig
 import com.sosu.gitrending.data.model.app.DConfig
