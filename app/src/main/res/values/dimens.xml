@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- splash -->
+    <dimen name="splash_activity__item_margin_top">12dp</dimen>
+
+</resources>

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.sosu.gitrending.di.viewmodel.ViewModelFactory
 import com.sosu.gitrending.di.viewmodel.ViewModelKey
 import com.sosu.gitrending.ui.main.MainViewModel
+import com.sosu.gitrending.ui.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -22,6 +23,11 @@ abstract class ViewModelBuilder {
     @IntoMap
     @ViewModelKey(MainViewModel::class)
     abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SplashViewModel::class)
+    abstract fun bindSplashViewModel(splashViewModel: SplashViewModel): ViewModel
 
     /*
     * Binds ViewModels factory to provide ViewModels
