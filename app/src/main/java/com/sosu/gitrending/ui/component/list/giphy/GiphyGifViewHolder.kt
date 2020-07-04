@@ -34,7 +34,7 @@ class GiphyGifViewHolder @Inject constructor(
         }
 
         override fun onBind(item: GiphyGif) {
-            // todo default 
+            // todo default
             gifImage.layoutParams.height = item.images?.previewGif?.height ?: 100
 
             GlideUtils.setSrcCenterCrop(context, gifImage, item.images?.previewGif?.getResUrl(), R.drawable.error_photo_30_w)
