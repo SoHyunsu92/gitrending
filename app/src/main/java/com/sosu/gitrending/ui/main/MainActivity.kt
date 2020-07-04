@@ -1,6 +1,5 @@
 package com.sosu.gitrending.ui.main
 
-import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,7 +8,6 @@ import com.sosu.gitrending.R
 import com.sosu.gitrending.databinding.ActivityMainBinding
 import com.sosu.gitrending.ui.base.BaseActivity
 import com.sosu.gitrending.ui.base.rv.BaseRecyclerView
-import com.sosu.gitrending.ui.base.rv.BaseRecyclerViewPaging
 import com.sosu.gitrending.ui.component.list.giphy.GiphyGifsAdatper
 import com.sosu.gitrending.ui.component.list.giphy.GiphyGifsAdatper.Companion.GRID_MAIN_HOME
 import kotlinx.android.synthetic.main.activity_main.*
@@ -60,7 +58,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     // gifs recycler view 초기화
     private fun initGifsRecyclerView(){
         baseRecyclerView.initLinearLayoutManager(LinearLayoutManager.VERTICAL)
-        baseRecyclerView.initGridLayoutManager(GRID_MAIN_HOME)
+        baseRecyclerView.initStaggeredGridLayoutManager(GRID_MAIN_HOME)
+
+        gifsAdapter.setCol(baseRecyclerView.getGridCol())
 
         // need to next rv paging
         baseRecyclerView.setOnPagingListener(object : BaseRecyclerView.PagingListener {

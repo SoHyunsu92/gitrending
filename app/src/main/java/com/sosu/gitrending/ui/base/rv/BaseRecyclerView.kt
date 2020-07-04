@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 /**
  * Created by hyunsuso on 2020/07/04.
@@ -31,6 +32,7 @@ class BaseRecyclerView constructor(
     * */
     private var linearLayoutManager: LinearLayoutManager? = null
     private var gridLayoutManager: GridLayoutManager? = null
+    private var staggeredGridLayoutManager : StaggeredGridLayoutManager? = null
 
     private var layoutManagerType : LayoutManagerType = LayoutManagerType.LINEAR
 
@@ -80,6 +82,26 @@ class BaseRecyclerView constructor(
         }
         gridLayoutManager = GridLayoutManager(context, cols)
         recyclerView.layoutManager = gridLayoutManager
+    }
+
+    fun initStaggeredGridLayoutManager(_cols: Int){
+        var cols = _cols
+        if (cols <= 0) {
+            cols = 1
+        }
+
+        this.staggeredGridLayoutManager = StaggeredGridLayoutManager(_cols, 1)
+
+        recyclerView.layoutManager = staggeredGridLayoutManager
+    }
+
+    fun getGridCol() : Int{
+        if(gridLayoutManager != null){
+            return gridLayoutManager?.spanCount ?: 1
+        } else if(staggeredGridLayoutManager != null){
+            return staggeredGridLayoutManager?.spanCount ?: 1
+        }
+        return 1
     }
 
     fun setRecyclerViewAdapter(recyclerViewAdapterImpl: BaseRecyclerViewAdapterImpl<*, *>){

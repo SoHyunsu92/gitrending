@@ -18,8 +18,11 @@ class GiphyGifsAdatper @Inject constructor(
     companion object{
         val TAG = GiphyGifsAdatper::class.java.simpleName
 
+        const val GRID_DEFAULT = 1
         const val GRID_MAIN_HOME = 2
     }
+
+    private var col = GRID_DEFAULT
 
     @Inject lateinit var giphyGifViewHolder : GiphyGifViewHolder
 
@@ -30,6 +33,10 @@ class GiphyGifsAdatper @Inject constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<GiphyGif> {
         val view = LayoutInflater.from(parent.context).inflate(getLayoutId(viewType), parent, false)
 
-        return giphyGifViewHolder.Default(view)
+        return giphyGifViewHolder.DefaultGrid(view, col)
+    }
+
+    fun setCol(col : Int){
+        this.col = col
     }
 }

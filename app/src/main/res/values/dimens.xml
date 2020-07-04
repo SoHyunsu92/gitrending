@@ -7,5 +7,10 @@
 
     <!-- splash -->
     <dimen name="splash_activity__item_margin_top">12dp</dimen>
+    
+    <!-- trending gif -->
+    <!-- adapter -->
+    <dimen name="adapter_giphy_gifs__frame_margin_top">4dp</dimen>
+    <dimen name="adapter_giphy_gifs__frame_margin_across">2dp</dimen>
 
 </resources>
