@@ -54,4 +54,7 @@ class GiphyGifViewHolder @Inject constructor(
             gifImage.layoutParams.height = GraphicUtils.getFrameHeightRatio(itemWidth, width, height)
         }
     }
+
+    // todo 바탕색 랜덤으로 해서 밑배경 보여주기
+    // todo clicked listener
 }
