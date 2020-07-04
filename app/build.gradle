@@ -43,6 +43,7 @@ android {
             manifestPlaceholders = [
                     appName: "DevGitrending",
             ]
+            buildConfigField("String", "api_giphy", "\"https://www.api.giphy.com/v1/\"")
         }
 
         prod {
@@ -51,6 +52,7 @@ android {
             manifestPlaceholders = [
                     appName: "Gitrending",
             ]
+            buildConfigField("String", "api_giphy", "\"https://www.api.giphy.com/v1/\"")
         }
     }
 }
