@@ -5,6 +5,12 @@ package com.sosu.gitrending.ui.main
  */
 interface MainNavigator {
 
+    // bottom tab
     fun onShowedTrending()
     fun onShowedFavorite()
+
+    // rv
+    fun onInitPageFlags()
+    fun onCompletedNextPage(nextPage : Int)
+    fun onLastPage()
 }

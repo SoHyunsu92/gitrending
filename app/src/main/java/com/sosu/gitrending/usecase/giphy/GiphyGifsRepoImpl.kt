@@ -2,6 +2,7 @@ package com.sosu.gitrending.usecase.giphy
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.sosu.gitrending.data.DataConstant.NULL_DATA
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.data.remote.base.res.ApiResultListener
 import com.sosu.gitrending.data.remote.base.res.ApiStatusListener
@@ -35,7 +36,11 @@ class GiphyGifsRepoImpl @Inject constructor(
             var error = ""
 
             override fun onSuccess(result: List<GiphyGif>) {
-                _gifs.postValue(result)
+                if(result.isEmpty()){
+                    this.error = NULL_DATA
+                } else{
+                    _gifs.postValue(result)
+                }
             }
 
             override fun onFailed(error: String) {

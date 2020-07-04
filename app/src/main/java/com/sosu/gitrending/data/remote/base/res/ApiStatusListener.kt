@@ -6,5 +6,5 @@ package com.sosu.gitrending.data.remote.base.res
 interface ApiStatusListener {
 
     fun onStarted()
-    fun onCompleted(error : String?)
+    fun onCompleted(error : String)
 }

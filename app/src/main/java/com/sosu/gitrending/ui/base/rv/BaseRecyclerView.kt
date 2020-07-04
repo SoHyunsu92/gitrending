@@ -17,7 +17,7 @@ class BaseRecyclerView constructor(
     companion object{
         val TAG = BaseRecyclerView::class.java.simpleName
 
-        const val PAGE_START = 1
+        const val PAGE_START = 0
     }
 
     enum class LayoutManagerType{
