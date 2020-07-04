@@ -18,6 +18,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     // for com.squareup.retrofit2:adapter-rxjava2
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
