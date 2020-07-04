@@ -5,8 +5,9 @@ import com.sosu.gitrending.BR
 import com.sosu.gitrending.R
 import com.sosu.gitrending.databinding.ActivityMainBinding
 import com.sosu.gitrending.ui.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNavigator{
 
     companion object{
         val TAG = MainActivity::class.java.simpleName
@@ -37,6 +38,24 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun initAfterBinding() {
+        mainViewModel.setNavigator(this)
+    }
 
+    // init bottom tab settings
+    private fun initBottomTab(){
+        text_main_activity__trending.isSelected = false
+        text_main_activity__favorite.isSelected = false
+    }
+
+    override fun onShowedTrending() {
+        initBottomTab()
+
+        text_main_activity__trending.isSelected = true
+    }
+
+    override fun onShowedFavorite() {
+        initBottomTab()
+
+        text_main_activity__favorite.isSelected = true
     }
 }

@@ -1,5 +1,6 @@
 package com.sosu.gitrending.ui.main
 
+import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.ui.base.BaseViewModel
 import com.sosu.gitrending.usecase.giphy.GiphyGifsRepoImpl
 import javax.inject.Inject
@@ -20,8 +21,14 @@ class MainViewModel @Inject constructor(
     }
 
     init {
-        // todo
-        gifsRepoImpl.getRemoteTrendings(1, null)
+        onShowTrending()
     }
 
+    fun onShowTrending(){
+        getNavigator()?.onShowedTrending()
+    }
+
+    fun onShowFavorite(){
+        getNavigator()?.onShowedFavorite()
+    }
 }

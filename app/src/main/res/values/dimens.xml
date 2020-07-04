@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- common -->
+    <dimen name="common__title_frame_height">55dp</dimen>
+    <dimen name="common__title_frame_padding_horizontal">16dp</dimen>
+
     <!-- splash -->
     <dimen name="splash_activity__item_margin_top">12dp</dimen>
 

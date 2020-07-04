@@ -12,6 +12,48 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            style="@style/TextColorTPrimaryPt16B"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common__title_frame_height"
+            android:paddingHorizontal="@dimen/common__title_frame_padding_horizontal"
+            android:text="@string/app_name"
+            android:gravity="center"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_main_activity__gifs"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                style="@style/TextSelectColorTPrimary_ColorTDisablePt14"
+                android:id="@+id/text_main_activity__trending"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/str_trending"
+                android:gravity="center"
+                android:onClick="@{() -> viewModel.onShowTrending()}"/>
+
+            <TextView
+                style="@style/TextSelectColorTPrimary_ColorTDisablePt14"
+                android:id="@+id/text_main_activity__favorite"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/str_favorite"
+                android:gravity="center"
+                android:onClick="@{() -> viewModel.onShowFavorite()}"/>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

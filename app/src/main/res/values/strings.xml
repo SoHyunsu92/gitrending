@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">gitrending</string>
     <string name="app_owner">Hyunsu So</string>
+
+    <string name="str_trending">Trending</string>
+    <string name="str_favorite">Favorite</string>
 </resources>
