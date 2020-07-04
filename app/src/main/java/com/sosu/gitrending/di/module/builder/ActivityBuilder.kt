@@ -1,5 +1,6 @@
 package com.sosu.gitrending.di.module.builder
 
+import com.sosu.gitrending.ui.giphy.detail.GiphyDetailActivity
 import com.sosu.gitrending.ui.main.MainActivity
 import com.sosu.gitrending.ui.splash.SplashActivity
 import dagger.Module
@@ -18,4 +19,7 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract fun contributeMainActivity(): MainActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeGiphyDetailActivity(): GiphyDetailActivity
 }
