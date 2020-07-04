@@ -2,6 +2,7 @@ package com.sosu.gitrending.di.component
 
 import com.sosu.gitrending.BaseApplication
 import com.sosu.gitrending.di.module.app.AppModule
+import com.sosu.gitrending.di.module.builder.ActivityBuilder
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -15,7 +16,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [
     AndroidInjectionModule::class,
-    AppModule::class
+    AppModule::class,
+    ActivityBuilder::class
 ])
 interface AppComponent{
 
