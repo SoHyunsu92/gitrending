@@ -1,9 +1,11 @@
 package com.sosu.gitrending.data.remote.giphy
 
+import com.sosu.gitrending.BuildConfig
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.data.remote.base.RetrofitApiImpl
 import com.sosu.gitrending.data.remote.base.req.ApiHeader
 import com.sosu.gitrending.data.remote.base.res.ApiResultListener
+import com.sosu.gitrending.data.remote.giphy.GiphyTrendingApi.Companion.OFFSET_DEFAULT
 import com.sosu.gitrending.data.remote.giphy.res.GiphyApiCallback
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -20,12 +22,12 @@ class GiphyTrendingRetrofitImpl @Inject constructor(
 ) : GiphyTrendingRetrofit {
 
     override fun getTrendings(
-        page: Int,
+        offset: Int,
         resultListener: ApiResultListener<List<GiphyGif>>
     ): Disposable {
         return retrofitApiImpl
             .giphyRetrofit(GiphyTrendingApi::class.java, ApiHeader.getDefault())
-            .getTrendings()
+            .getTrendings(BuildConfig.key_api_giphy, offset, OFFSET_DEFAULT)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(GiphyApiCallback.ApiObservable(resultListener))
