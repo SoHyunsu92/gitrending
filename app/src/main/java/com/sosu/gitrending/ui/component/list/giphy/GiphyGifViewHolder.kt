@@ -3,6 +3,7 @@ package com.sosu.gitrending.ui.component.list.giphy
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sosu.gitrending.R
 import com.sosu.gitrending.data.model.giphy.GiphyGif
@@ -36,13 +37,10 @@ class GiphyGifViewHolder @Inject constructor(
             DeviceUtils.getScreenWidth(context) / col
         }
 
-        private val rootView by lazy<View> { itemView.findViewById(R.id.container_giphy_gifs_adapter__root) }
         private val gifImage by lazy<ImageView> { itemView.findViewById(R.id.image_giphy_gifs_adapter__gif) }
 
         override fun onBind(item: GiphyGif) {
             initImageHeight(item)
-
-            initMarginAcross()
 
             GlideUtils.setSrcCenterCrop(context, gifImage, item.images?.previewGif?.getResUrl(), R.drawable.error_photo_30_w)
         }
@@ -54,26 +52,6 @@ class GiphyGifViewHolder @Inject constructor(
 
             // dynamic height
             gifImage.layoutParams.height = GraphicUtils.getFrameHeightRatio(itemWidth, width, height)
-        }
-
-        private fun initMarginAcross(){
-            val lp = rootView.layoutParams as RecyclerView.LayoutParams
-            val acrossPx: Int = ResourceUtils.dimenToPx(context, R.dimen.adapter_giphy_gifs__frame_margin_across)
-            var outsidePx = 0
-            when(adapterPosition % 2){
-                // left side
-                0 -> {
-                    lp.leftMargin = outsidePx
-                    lp.rightMargin = acrossPx
-                }
-                // right side
-                1 -> {
-                    lp.leftMargin = acrossPx
-                    lp.rightMargin = outsidePx
-                }
-            }
-
-            rootView.layoutParams = lp
         }
     }
 }
