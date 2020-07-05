@@ -22,6 +22,17 @@ class GiphyGifFavoriteDatabaseImpl @Inject constructor(
 
     private val giphyGifFavoriteDao = appDatabase.giphyGifFavoriteDao()
 
+    override fun findOne(
+        id: String,
+        resultListener: DatabaseCallback.ResultListener<GiphyGifFavoriteEntity>
+    ): Disposable {
+        return Observable.fromCallable<GiphyGifFavoriteEntity>(Callable<GiphyGifFavoriteEntity> {
+            this.giphyGifFavoriteDao.findOne(id)
+        }).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(DatabaseCallback.DBObservable(resultListener = resultListener))
+    }
+
     override fun findAll(
         resultListener: DatabaseCallback.ResultListener<List<GiphyGifFavoriteEntity>>
     ): Disposable {

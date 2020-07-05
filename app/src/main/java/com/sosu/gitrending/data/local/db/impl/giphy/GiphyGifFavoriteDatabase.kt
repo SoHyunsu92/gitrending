@@ -9,6 +9,11 @@ import io.reactivex.disposables.Disposable
  */
 interface GiphyGifFavoriteDatabase {
 
+    fun findOne(
+        id : String,
+        resultListener: DatabaseCallback.ResultListener<GiphyGifFavoriteEntity>
+    ) : Disposable
+
     fun findAll(
         resultListener: DatabaseCallback.ResultListener<List<GiphyGifFavoriteEntity>>
     ) : Disposable
