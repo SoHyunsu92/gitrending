@@ -19,7 +19,7 @@ class StartActivityImpl @Inject constructor(
 ) : StartActivity{
 
     companion object{
-        const val EXTRA_SELECT_IDX = "select_idx"
+        const val EXTRA_ID = "ie"
     }
 
     override fun openMainActivity() : Intent{
@@ -29,10 +29,10 @@ class StartActivityImpl @Inject constructor(
         return intent
     }
 
-    override fun openGiphyDetailActivity(selectIdx : Int): Intent {
+    override fun openGiphyDetailActivity(id : String): Intent {
         val intent = Intent(context, GiphyDetailActivity::class.java)
 
-        intent.putExtra(EXTRA_SELECT_IDX, selectIdx)
+        intent.putExtra(EXTRA_ID, id)
 
         return intent
     }

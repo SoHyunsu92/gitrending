@@ -27,7 +27,7 @@ interface GiphyGifsFavoriteRepo{
     ): Disposable
 
     fun deleteItem(
-        id : String,
+        giphyGif: GiphyGif,
         resultListener: BaseUsecaseListener.OnResultListener?
     ): Disposable
 

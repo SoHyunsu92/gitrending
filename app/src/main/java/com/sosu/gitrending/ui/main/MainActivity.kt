@@ -69,7 +69,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         gifsAdapter.setCol(baseRecyclerView.getGridCol())
         gifsAdapter.setOnClickItemListener(object : GiphyGifViewHolder.OnClickItemListener{
             override fun onClickRoot(giphyGif: GiphyGif) {
-                startActivity(startActivityImpl.openGiphyDetailActivity(gifsAdapter.getItemIdx(giphyGif)))
+                startActivity(startActivityImpl.openGiphyDetailActivity(giphyGif.id))
             }
         })
 
@@ -84,6 +84,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         * changed gifs data on repository
         * */
         mainViewModel.getGifs().observe(this, Observer {
+            gifsAdapter.addAllItem(it)
+        })
+
+        mainViewModel.getFavoriteGifs().observe(this, Observer {
             gifsAdapter.addAllItem(it)
         })
     }

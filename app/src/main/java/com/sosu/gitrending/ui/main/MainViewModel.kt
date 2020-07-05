@@ -5,6 +5,7 @@ import com.sosu.gitrending.data.remote.base.res.ApiStatusListener
 import com.sosu.gitrending.ui.base.BaseViewModel
 import com.sosu.gitrending.ui.base.rv.BaseRecyclerView.Companion.PAGE_START
 import com.sosu.gitrending.ui.component.list.giphy.GiphyGifsAdatper
+import com.sosu.gitrending.usecase.giphy.GiphyGifsFavoriteRepoImpl
 import com.sosu.gitrending.usecase.giphy.GiphyGifsRepoImpl
 import javax.inject.Inject
 
@@ -12,7 +13,8 @@ import javax.inject.Inject
  * Created by hyunsuso on 2020/07/04.
  */
 class MainViewModel @Inject constructor(
-    private val giphyGifsRepoImpl: GiphyGifsRepoImpl
+    private val giphyGifsRepoImpl: GiphyGifsRepoImpl,
+    private val gifsFavoriteRepoImpl: GiphyGifsFavoriteRepoImpl
 ) : BaseViewModel<MainNavigator>() {
 
     companion object {
@@ -20,6 +22,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun getGifs() = giphyGifsRepoImpl.gifs
+    fun getFavoriteGifs() = gifsFavoriteRepoImpl.gifs
 
     override fun getName(): String {
         return TAG
@@ -45,6 +48,13 @@ class MainViewModel @Inject constructor(
         })
     }
 
+    fun findAllFavoriteGifs(){
+        getNavigator()?.onInitPageFlags()
+        getNavigator()?.onLastPage()
+
+        gifsFavoriteRepoImpl.findAll(null)
+    }
+
     fun onShowTrending(){
         getNavigator()?.onShowedTrending()
 
@@ -54,6 +64,6 @@ class MainViewModel @Inject constructor(
     fun onShowFavorite(){
         getNavigator()?.onShowedFavorite()
 
-        // todo favorite
+        findAllFavoriteGifs()
     }
 }

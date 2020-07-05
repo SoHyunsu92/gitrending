@@ -62,14 +62,18 @@ class GiphyGifsRepoImpl @Inject constructor(
         return disposable
     }
 
-    override fun onSelectTrending(idx: Int) {
-        if(_gifs.value != null
-            && 0 <= idx
-            && idx < _gifs.value!!.size){
-            _selectedGif.value = _gifs.value!!.get(idx)
-        } else{
-            // empty data
-            _selectedGif.value = GiphyGif()
+    override fun onSelectTrendingById(id : String) {
+        if(_gifs.value != null){
+            for(item in _gifs.value!!){
+                if(item.id == id){
+                    // find
+                    _selectedGif.value = item
+                    return
+                }
+            }
         }
+
+        // empty data
+        _selectedGif.value = GiphyGif()
     }
 }

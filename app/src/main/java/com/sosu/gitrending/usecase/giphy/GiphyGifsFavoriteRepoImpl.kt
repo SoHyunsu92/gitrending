@@ -2,7 +2,6 @@ package com.sosu.gitrending.usecase.giphy
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.sosu.gitrending.data.DataConstant
 import com.sosu.gitrending.data.local.db.entity.GiphyGifFavoriteEntity
 import com.sosu.gitrending.data.local.db.entity.toGiphyGif
 import com.sosu.gitrending.data.local.db.entity.toGiphyGifs
@@ -10,15 +9,8 @@ import com.sosu.gitrending.data.local.db.impl.base.DatabaseCallback
 import com.sosu.gitrending.data.local.db.impl.giphy.GiphyGifFavoriteDatabaseImpl
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.data.model.giphy.toGiphyGifFavoriteEntity
-import com.sosu.gitrending.data.remote.base.res.ApiResultListener
-import com.sosu.gitrending.data.remote.base.res.ApiStatusListener
-import com.sosu.gitrending.data.remote.giphy.GiphyTrendingRetrofitImpl
 import com.sosu.gitrending.usecase.base.BaseUsecaseListener
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.Callable
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -101,7 +93,7 @@ class GiphyGifsFavoriteRepoImpl @Inject constructor(
     ): Disposable {
         val disposable = gifFavoriteDatabaseImpl.insert(giphyGif.toGiphyGifFavoriteEntity, object : DatabaseCallback.ResultListener<Any?> {
             override fun onSuccess(result: Any?) {
-                addFavoriteHashSet(giphyGif.id)
+                onAfterInsert(giphyGif)
 
                 resultListener?.onSuccess()
             }
@@ -121,12 +113,12 @@ class GiphyGifsFavoriteRepoImpl @Inject constructor(
     }
 
     override fun deleteItem(
-        id: String,
+        giphyGif: GiphyGif,
         resultListener: BaseUsecaseListener.OnResultListener?
     ): Disposable {
-        val disposable = gifFavoriteDatabaseImpl.delete(id, object : DatabaseCallback.ResultListener<Any?> {
+        val disposable = gifFavoriteDatabaseImpl.delete(giphyGif.id, object : DatabaseCallback.ResultListener<Any?> {
             override fun onSuccess(result: Any?) {
-                removeFavoriteHashSet(id)
+                onAfterDelete(giphyGif)
 
                 resultListener?.onSuccess()
             }
@@ -153,7 +145,7 @@ class GiphyGifsFavoriteRepoImpl @Inject constructor(
         val disposable = if(isFavorite){
             insertItem(giphyGif, resultListener)
         } else{
-            deleteItem(giphyGif.id, resultListener)
+            deleteItem(giphyGif, resultListener)
         }
 
         resultListener?.onStarted()
@@ -184,5 +176,28 @@ class GiphyGifsFavoriteRepoImpl @Inject constructor(
         return favoriteIdSet?.contains(id) ?: false
     }
 
+    private fun onAfterInsert(giphyGif: GiphyGif){
+        insertLivaData(giphyGif)
+
+        addFavoriteHashSet(giphyGif.id)
+    }
+
+    private fun onAfterDelete(giphyGif: GiphyGif){
+        removeLiveData(giphyGif)
+
+        removeFavoriteHashSet(giphyGif.id)
+    }
+
+    private fun insertLivaData(giphyGif: GiphyGif){
+        val items = _gifs.value as ArrayList<GiphyGif> ?: return
+        items.add(giphyGif)
+        _gifs.value = items
+    }
+
+    private fun removeLiveData(giphyGif: GiphyGif){
+        val items = _gifs.value as ArrayList<GiphyGif> ?: return
+        items.remove(giphyGif)
+        _gifs.value = items
+    }
 
 }

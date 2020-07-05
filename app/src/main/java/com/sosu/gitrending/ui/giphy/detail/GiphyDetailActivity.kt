@@ -5,11 +5,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.sosu.gitrending.BR
 import com.sosu.gitrending.R
-import com.sosu.gitrending.data.DataConstant.NULL_INT
+import com.sosu.gitrending.data.DataConstant.NULL_DATA
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.databinding.ActivityGiphyDetailBinding
 import com.sosu.gitrending.ui.base.BaseActivity
-import com.sosu.gitrending.usecase.ui.StartActivityImpl.Companion.EXTRA_SELECT_IDX
+import com.sosu.gitrending.usecase.ui.StartActivityImpl.Companion.EXTRA_ID
 import com.sosu.gitrending.utils.GlideUtils
 import kotlinx.android.synthetic.main.activity_giphy_detail.*
 
@@ -57,9 +57,9 @@ class GiphyDetailActivity
     }
 
     private fun onParseIntentExtra(){
-        val selectIdx = intent.getIntExtra(EXTRA_SELECT_IDX, NULL_INT)
+        val id = intent.getStringExtra(EXTRA_ID)
 
-        onSelectInfo(selectIdx)
+        onSelectTrendingById(id)
     }
 
     private fun initLiveDataListener(){
@@ -84,8 +84,8 @@ class GiphyDetailActivity
         btn_activity_giphy_detail__favorite.isSelected = giphyDetailViewModel.isFavorite(giphyGif.id)
     }
 
-    private fun onSelectInfo(idx : Int){
-        giphyDetailViewModel.onSelectedInfo(idx)
+    private fun onSelectTrendingById(id: String){
+        giphyDetailViewModel.onSelectTrendingById(id)
     }
 
     override fun onClick(v: View?) {

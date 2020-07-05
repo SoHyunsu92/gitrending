@@ -15,5 +15,5 @@ interface GiphyGifsRepo{
     ) : Disposable
 
     // select giphy gif trending
-    fun onSelectTrending(idx : Int)
+    fun onSelectTrendingById(id : String)
 }
