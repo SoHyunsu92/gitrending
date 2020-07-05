@@ -22,14 +22,16 @@ import com.sosu.gitrending.data.DataConstant.DATA_update_datetime
 import com.sosu.gitrending.data.DataConstant.DATA_url
 import com.sosu.gitrending.data.DataConstant.DATA_user
 import com.sosu.gitrending.data.DataConstant.DATA_username
+import com.sosu.gitrending.data.local.db.entity.GiphyGifFavoriteEntity
 import com.sosu.gitrending.data.model.user.User
+import com.sosu.gitrending.utils.GsonUtils
 
 /**
  * Created by hyunsuso on 2020/07/04.
  */
 data class GiphyGif(
     @SerializedName(DATA_type)                  var type : String? = "",
-    @SerializedName(DATA_id)                    var id : String? = "",
+    @SerializedName(DATA_id)                    var id : String = "",
     @SerializedName(DATA_slug)                  var slug : String? = "",
     @SerializedName(DATA_url)                   var url : String? = "",
     @SerializedName(DATA_bitly_url)             var bitlyUrl: String? = "",
@@ -64,4 +66,34 @@ data class GiphyGif(
         return username ?: context.getString(R.string.str_username)
     }
 
+    override fun hashCode(): Int {
+        return id.hashCode() * 31
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as GiphyGif
+
+        if (id != other.id) return false
+
+        return true
+    }
 }
+
+/*
+* extension
+* */
+var GiphyGif.toGiphyGifFavoriteEntity : GiphyGifFavoriteEntity
+    get() {
+        return GiphyGifFavoriteEntity(
+            id = id,
+            type = type,
+            user = GsonUtils.objectToJsonString(user),
+            images = GsonUtils.objectToJsonString(images),
+            title = title
+        )
+    }
+    set(value) {}
+
