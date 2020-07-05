@@ -5,6 +5,7 @@ package com.sosu.gitrending.ui.base.rv
  */
 interface BaseRecyclerViewAdapter<T> {
     fun getItem(position: Int): T?
+    fun getItemIdx(item : T) : Int
     fun addItem(item: T)
     fun addAllItem(items: List<T>)
     fun setItems(items: List<T>)

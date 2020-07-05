@@ -23,6 +23,7 @@ class GiphyGifsAdatper @Inject constructor(
     }
 
     private var col = GRID_DEFAULT
+    private var onClickItemListener: GiphyGifViewHolder.OnClickItemListener? = null
 
     @Inject lateinit var giphyGifViewHolder : GiphyGifViewHolder
 
@@ -33,10 +34,14 @@ class GiphyGifsAdatper @Inject constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<GiphyGif> {
         val view = LayoutInflater.from(parent.context).inflate(getLayoutId(viewType), parent, false)
 
-        return giphyGifViewHolder.DefaultGrid(view, col)
+        return giphyGifViewHolder.DefaultGrid(view, col, onClickItemListener)
     }
 
     fun setCol(col : Int){
         this.col = col
+    }
+
+    fun setOnClickItemListener(onClickItemListener: GiphyGifViewHolder.OnClickItemListener){
+        this.onClickItemListener = onClickItemListener
     }
 }

@@ -2,6 +2,7 @@ package com.sosu.gitrending.usecase.ui
 
 import android.content.Context
 import android.content.Intent
+import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.ui.giphy.detail.GiphyDetailActivity
 import com.sosu.gitrending.ui.main.MainActivity

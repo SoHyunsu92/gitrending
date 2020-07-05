@@ -30,8 +30,11 @@ class GiphyGifViewHolder @Inject constructor(
     * */
     inner class DefaultGrid constructor(
         itemView: View,
-        col : Int
+        col : Int,
+        onClickItemListener: OnClickItemListener?
     ) : BaseRecyclerViewAdapterImpl.BaseViewHolder<GiphyGif>(itemView) {
+
+        private val _onClickItemListener = onClickItemListener
 
         private val itemWidth by lazy {
             DeviceUtils.getScreenWidth(context) / col
@@ -43,6 +46,8 @@ class GiphyGifViewHolder @Inject constructor(
             initImageHeight(item)
 
             GlideUtils.setSrcCenterCrop(context, gifImage, item.images?.previewGif?.getResUrl(), R.drawable.error_photo_30_w)
+
+            initListener(item)
         }
 
         private fun initImageHeight(item: GiphyGif){
@@ -53,8 +58,17 @@ class GiphyGifViewHolder @Inject constructor(
             // dynamic height
             gifImage.layoutParams.height = GraphicUtils.getFrameHeightRatio(itemWidth, width, height)
         }
+
+        private fun initListener(item : GiphyGif){
+            gifImage.setOnClickListener{
+                _onClickItemListener?.onClickRoot(item)
+            }
+        }
     }
 
     // todo 바탕색 랜덤으로 해서 밑배경 보여주기
-    // todo clicked listener
+
+    interface OnClickItemListener{
+        fun onClickRoot(giphyGif: GiphyGif)
+    }
 }

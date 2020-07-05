@@ -5,11 +5,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sosu.gitrending.BR
 import com.sosu.gitrending.R
+import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.databinding.ActivityMainBinding
 import com.sosu.gitrending.ui.base.BaseActivity
 import com.sosu.gitrending.ui.base.rv.BaseRecyclerView
+import com.sosu.gitrending.ui.component.list.giphy.GiphyGifViewHolder
 import com.sosu.gitrending.ui.component.list.giphy.GiphyGifsAdatper
 import com.sosu.gitrending.ui.component.list.giphy.GiphyGifsAdatper.Companion.GRID_MAIN_HOME
+import com.sosu.gitrending.usecase.ui.StartActivityImpl
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -28,6 +31,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     private val baseRecyclerView by lazy {
         BaseRecyclerView(applicationContext, rv_main_activity__gifs, gifsAdapter)
     }
+
+    @Inject
+    lateinit var startActivityImpl: StartActivityImpl
 
     override fun getName(): String {
         return TAG
@@ -61,6 +67,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         baseRecyclerView.initStaggeredGridLayoutManager(GRID_MAIN_HOME)
 
         gifsAdapter.setCol(baseRecyclerView.getGridCol())
+        gifsAdapter.setOnClickItemListener(object : GiphyGifViewHolder.OnClickItemListener{
+            override fun onClickRoot(giphyGif: GiphyGif) {
+                startActivity(startActivityImpl.openGiphyDetailActivity(gifsAdapter.getItemIdx(giphyGif)))
+            }
+        })
 
         // need to next rv paging
         baseRecyclerView.setOnPagingListener(object : BaseRecyclerView.PagingListener {

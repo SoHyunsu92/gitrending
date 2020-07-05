@@ -40,6 +40,10 @@ abstract class BaseRecyclerViewAdapterImpl<T, VH : BaseRecyclerViewAdapterImpl.B
         return null
     }
 
+    override fun getItemIdx(item: T): Int {
+        return items.indexOf(item)
+    }
+
     override fun addItem(item: T){
         if(itemHashMap.containsKey(item.hashCode())){
             return
