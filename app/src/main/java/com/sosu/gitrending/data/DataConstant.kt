@@ -47,7 +47,7 @@ object DataConstant {
     const val DATA_webp = "webp"
     const val DATA_width = "width"
 
-
+    const val NULL_INT = -1
     const val NULL_DATA = "nullData"
 
 }

@@ -14,6 +14,7 @@
 
         <!-- todo view padger -->
 
+        <!-- todo gif player -->
         <ImageView
             android:id="@+id/image_giphy_detail_activity__gif"
             android:layout_width="match_parent"

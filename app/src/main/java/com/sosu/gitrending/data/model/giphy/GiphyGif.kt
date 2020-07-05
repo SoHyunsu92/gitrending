@@ -1,6 +1,8 @@
 package com.sosu.gitrending.data.model.giphy
 
+import android.content.Context
 import com.google.gson.annotations.SerializedName
+import com.sosu.gitrending.R
 import com.sosu.gitrending.data.DataConstant.DATA_bitly_url
 import com.sosu.gitrending.data.DataConstant.DATA_content_url
 import com.sosu.gitrending.data.DataConstant.DATA_create_datetime
@@ -52,6 +54,14 @@ data class GiphyGif(
     companion object{
         // type default
         private const val TYPE_GIF = "gif"
+    }
+
+    fun getTitle(context: Context) : String{
+        return title ?: context.getString(R.string.str_title)
+    }
+
+    fun getUsername(context: Context) : String{
+        return username ?: context.getString(R.string.str_username)
     }
 
 }

@@ -18,7 +18,7 @@ class StartActivityImpl @Inject constructor(
 ) : StartActivity{
 
     companion object{
-        const val EXTRA_GIPHY_GIF = "giphy_gif"
+        const val EXTRA_SELECT_IDX = "select_idx"
     }
 
     override fun openMainActivity() : Intent{
@@ -28,10 +28,10 @@ class StartActivityImpl @Inject constructor(
         return intent
     }
 
-    override fun openGiphyDetailActivity(giphyGif: GiphyGif): Intent {
+    override fun openGiphyDetailActivity(selectIdx : Int): Intent {
         val intent = Intent(context, GiphyDetailActivity::class.java)
 
-        intent.putExtra(EXTRA_GIPHY_GIF, GsonUtils.objectToJsonString(giphyGif))
+        intent.putExtra(EXTRA_SELECT_IDX, selectIdx)
 
         return intent
     }

@@ -13,4 +13,7 @@ interface GiphyGifsRepo{
         offset : Int,
         apiStatusListener: ApiStatusListener?
     ) : Disposable
+
+    // select giphy gif trending
+    fun onSelectTrending(idx : Int)
 }
