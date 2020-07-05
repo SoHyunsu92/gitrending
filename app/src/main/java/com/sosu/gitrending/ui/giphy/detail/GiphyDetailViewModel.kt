@@ -17,7 +17,6 @@ class GiphyDetailViewModel @Inject constructor(
         val TAG = GiphyDetailViewModel::class.java.simpleName
     }
 
-    // todo  favorite 인 경우는 그것만 보여야한다
     fun getGif() = giphyGifsRepoImpl.selectedGif
 
     override fun getName(): String {
@@ -35,7 +34,7 @@ class GiphyDetailViewModel @Inject constructor(
     fun onChangeFavorite(isSelect: Boolean){
         val giphyGif = getGif().value
         if(giphyGif != null){
-            gifsFavoriteRepoImpl.setFavorite(giphyGif, isSelect, null)
+            addCompositeDisposable(gifsFavoriteRepoImpl.setFavorite(giphyGif, isSelect, null))
         }
     }
 }

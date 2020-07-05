@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.sosu.gitrending.BR
 import com.sosu.gitrending.R
 import com.sosu.gitrending.data.DataConstant.NULL_DATA
+import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.databinding.ActivityGiphyDetailBinding
 import com.sosu.gitrending.ui.base.BaseActivity
@@ -96,6 +97,7 @@ class GiphyDetailActivity
         }
     }
 
+    // todo 리스트 화면으로 가면 갱신할 수 있게 해주기 
     private fun onClickedFavorite(){
         val selecting = !btn_activity_giphy_detail__favorite.isSelected
         btn_activity_giphy_detail__favorite.isSelected = selecting

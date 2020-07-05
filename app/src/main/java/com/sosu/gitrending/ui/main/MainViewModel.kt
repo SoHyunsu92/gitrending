@@ -29,8 +29,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun getRemoteTrendings(offset : Int){
-        // todo addCompositeDisposable
-        giphyGifsRepoImpl.getRemoteTrendings(offset, object : ApiStatusListener{
+        addCompositeDisposable(giphyGifsRepoImpl.getRemoteTrendings(offset, object : ApiStatusListener{
             override fun onStarted() {
                 if(offset == PAGE_START){
                     getNavigator()?.onInitPageFlags()
@@ -45,14 +44,14 @@ class MainViewModel @Inject constructor(
                 }
             }
 
-        })
+        }))
     }
 
     fun findAllFavoriteGifs(){
         getNavigator()?.onInitPageFlags()
         getNavigator()?.onLastPage()
 
-        gifsFavoriteRepoImpl.findAll(null)
+        addCompositeDisposable(gifsFavoriteRepoImpl.findAll(null))
     }
 
     fun onShowTrending(){
