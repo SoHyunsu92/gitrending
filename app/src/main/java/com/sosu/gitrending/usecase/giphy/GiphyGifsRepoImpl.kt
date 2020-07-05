@@ -32,6 +32,10 @@ class GiphyGifsRepoImpl @Inject constructor(
     val selectedGif: LiveData<GiphyGif>
         get() = _selectedGif
 
+    /*
+    * trending giphy gifs
+    * @memo 테스트 api 이기 때문에 페이지에서 중복된 데이터가 계속 내려온다.
+    * */
     override fun getRemoteTrendings(
         offset : Int,
         apiStatusListener: ApiStatusListener?
