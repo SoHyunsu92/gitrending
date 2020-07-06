@@ -116,7 +116,7 @@ class GiphyDetailActivity
         })
 
         // need to next rv paging
-        baseRecyclerView.setOnPagingListener(nested_giphy_detail_activity__root, object : BaseRecyclerView.PagingListener {
+        baseRecyclerView.setOnPagingListener(object : BaseRecyclerView.PagingListener {
             override fun onNextPage(currentPage: Int) {
                 giphyDetailViewModel.getRemoteTrendingRatingGifs(currentPage)
             }
