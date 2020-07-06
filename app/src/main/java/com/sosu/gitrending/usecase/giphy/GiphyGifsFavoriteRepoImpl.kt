@@ -26,17 +26,21 @@ class GiphyGifsFavoriteRepoImpl @Inject constructor(
         val TAG = GiphyGifsFavoriteRepoImpl::class.java.simpleName
     }
 
+    // favorite gifs
     private val _gifs = MutableLiveData<List<GiphyGif>>()
     val gifs: LiveData<List<GiphyGif>>
         get() = _gifs
 
     // is giphy gif favorite
+    // use favorite cache
     private var favoriteIdSet : HashSet<String>? = null
 
+    // 시작시, find all data
     init {
         findAll(null)
     }
 
+    // find one entity
     override fun findOne(
         id: String,
         resultListener: BaseUsecaseListener.OnResultItemListener<GiphyGif>?
@@ -62,6 +66,7 @@ class GiphyGifsFavoriteRepoImpl @Inject constructor(
         return disposable
     }
 
+    // find all entities
     override fun findAll(resultListener: BaseUsecaseListener.OnResultItemListener<List<GiphyGif>>?): Disposable {
         val disposable = gifFavoriteDatabaseImpl.findAll(object : DatabaseCallback.ResultListener<List<GiphyGifFavoriteEntity>> {
             override fun onSuccess(result: List<GiphyGifFavoriteEntity>) {
@@ -87,6 +92,7 @@ class GiphyGifsFavoriteRepoImpl @Inject constructor(
         return disposable
     }
 
+    // insert entity
     override fun insertItem(
         giphyGif: GiphyGif,
         resultListener: BaseUsecaseListener.OnResultListener?
@@ -112,6 +118,7 @@ class GiphyGifsFavoriteRepoImpl @Inject constructor(
         return disposable
     }
 
+    // delete entity
     override fun deleteItem(
         giphyGif: GiphyGif,
         resultListener: BaseUsecaseListener.OnResultListener?
@@ -137,6 +144,9 @@ class GiphyGifsFavoriteRepoImpl @Inject constructor(
         return disposable
     }
 
+    // set favorite, db operation and hashSet handling
+    // true - insert
+    // false - delete
     override fun setFavorite(
         giphyGif: GiphyGif,
         isFavorite: Boolean,
@@ -153,6 +163,7 @@ class GiphyGifsFavoriteRepoImpl @Inject constructor(
         return disposable;
     }
 
+    // add all hash set
     override fun addAllFavoriteHashSet(entities: List<GiphyGifFavoriteEntity>) {
         if(favoriteIdSet == null){
             favoriteIdSet = HashSet<String>()
@@ -162,38 +173,47 @@ class GiphyGifsFavoriteRepoImpl @Inject constructor(
         }
     }
 
+    // add hash set
+    // = favorite
     override fun addFavoriteHashSet(id: String) {
         favoriteIdSet?.add(id)
     }
 
+    // remove hash set
+    // = un favorite
     override fun removeFavoriteHashSet(id: String) {
         if(favoriteIdSet != null && favoriteIdSet?.contains(id)!!){
             favoriteIdSet?.remove(id)
         }
     }
 
+    // check favorite on hash set
     override fun isFavoriteHashSet(id: String) : Boolean{
         return favoriteIdSet?.contains(id) ?: false
     }
 
+    // handling insert
     private fun onAfterInsert(giphyGif: GiphyGif){
         insertLivaData(giphyGif)
 
         addFavoriteHashSet(giphyGif.id)
     }
 
+    // handling delete
     private fun onAfterDelete(giphyGif: GiphyGif){
         removeLiveData(giphyGif)
 
         removeFavoriteHashSet(giphyGif.id)
     }
 
+    // for add live data <List>
     private fun insertLivaData(giphyGif: GiphyGif){
         val items = _gifs.value as ArrayList<GiphyGif> ?: return
         items.add(giphyGif)
         _gifs.value = items
     }
 
+    // for remove live data <List>
     private fun removeLiveData(giphyGif: GiphyGif){
         val items = _gifs.value as ArrayList<GiphyGif> ?: return
         items.remove(giphyGif)

@@ -3,7 +3,6 @@ package com.sosu.gitrending.data.local.db.impl.giphy
 import com.sosu.gitrending.data.local.AppDatabase
 import com.sosu.gitrending.data.local.db.entity.GiphyGifFavoriteEntity
 import com.sosu.gitrending.data.local.db.impl.base.DatabaseCallback
-import com.sosu.gitrending.data.local.db.impl.giphy.GiphyGifFavoriteDatabase
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

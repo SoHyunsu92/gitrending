@@ -26,6 +26,7 @@ class MainViewModel @Inject constructor(
         return TAG
     }
 
+    // get trending gifs api
     fun getRemoteTrendingGifs(offset : Int){
         addCompositeDisposable(giphyGifsRepoImpl.getRemoteTrendingGifs(offset, object : ApiStatusListener{
             override fun onStarted() {
@@ -45,19 +46,22 @@ class MainViewModel @Inject constructor(
         }))
     }
 
-    fun findAllFavoriteGifs(){
+    // find all favorite gifs
+    private fun findAllFavoriteGifs(){
         getNavigator()?.onInitPageFlags()
         getNavigator()?.onLastPage()
 
         addCompositeDisposable(gifsFavoriteRepoImpl.findAll(null))
     }
 
+    // showed trending view
     fun onShowTrending(){
         getNavigator()?.onShowedTrending()
 
         getRemoteTrendingGifs(PAGE_START)
     }
 
+    // showed favorite view
     fun onShowFavorite(){
         getNavigator()?.onShowedFavorite()
 

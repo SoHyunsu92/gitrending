@@ -1,12 +1,10 @@
 package com.sosu.gitrending.ui.component.custom.player
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.sosu.gitrending.R
-import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.ui.base.BaseView
 import com.sosu.gitrending.utils.FileUtils
 import com.sosu.gitrending.utils.FileUtils.EXE_GIF
@@ -17,7 +15,6 @@ import com.sosu.gitrending.utils.GlideUtils
 import com.sosu.gitrending.utils.VideoViewUtils
 import kotlinx.android.synthetic.main.view_gif_player.view.*
 import java.util.*
-import javax.inject.Inject
 
 /**
  * Created by hyunsuso on 2020/07/06.

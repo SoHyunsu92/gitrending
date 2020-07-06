@@ -2,7 +2,6 @@ package com.sosu.gitrending.ui.base.rv
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import javax.inject.Singleton
 
 /**
  * Created by hyunsuso on 2020/07/04.

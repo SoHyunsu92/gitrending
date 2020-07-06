@@ -21,14 +21,17 @@ class GiphyGifDetailRepoImpl  @Inject constructor(
         val TAG = GiphyGifDetailRepoImpl::class.java.simpleName
     }
 
+    // rating gifs
     private val _ratingGifs = MutableLiveData<List<GiphyGif>>()
     val ratingGifs: LiveData<List<GiphyGif>>
         get() = _ratingGifs
 
+    // detail gif
     private val _detailGif = MutableLiveData<GiphyGif>()
     val detailGif: LiveData<GiphyGif>
         get() = _detailGif
 
+    // get trending rating gifs api
     override fun getRemoteTrendingRatingGifs(
         rating: String,
         offset: Int,
@@ -61,6 +64,7 @@ class GiphyGifDetailRepoImpl  @Inject constructor(
         return disposable
     }
 
+    // set detail gif
     override fun setGiphyGifDetail(giphyGif: GiphyGif) {
         _detailGif.value = giphyGif
     }

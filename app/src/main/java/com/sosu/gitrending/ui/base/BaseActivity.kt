@@ -1,13 +1,10 @@
 package com.sosu.gitrending.ui.base
 
-import android.content.Context
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import com.sosu.gitrending.data.model.alert.ToastMessage
 import com.sosu.gitrending.data.model.app.DConfig
 import com.sosu.gitrending.di.viewmodel.ViewModelFactory

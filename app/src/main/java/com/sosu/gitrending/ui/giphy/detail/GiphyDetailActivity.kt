@@ -23,7 +23,6 @@ import com.sosu.gitrending.utils.GlideUtils
 import com.sosu.gitrending.utils.GraphicUtils
 import com.sosu.gitrending.utils.GsonUtils
 import kotlinx.android.synthetic.main.activity_giphy_detail.*
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 /**

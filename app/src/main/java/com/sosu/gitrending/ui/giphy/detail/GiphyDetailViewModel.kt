@@ -30,6 +30,7 @@ class GiphyDetailViewModel @Inject constructor(
         return TAG
     }
 
+    // get trending rating gifs api
     fun getRemoteTrendingRatingGifs(offset : Int){
         addCompositeDisposable(gifDetailRepoImpl.getRemoteTrendingRatingGifs(getDetailGifRating(), offset, object :
             ApiStatusListener {
@@ -50,14 +51,17 @@ class GiphyDetailViewModel @Inject constructor(
         }))
     }
 
+    // set gif detail data
     fun setGiphyGifDetail(giphyGif: GiphyGif){
         gifDetailRepoImpl.setGiphyGifDetail(giphyGif)
     }
 
+    // check favorite
     fun isFavorite(id : String) : Boolean{
         return gifsFavoriteRepoImpl.isFavoriteHashSet(id)
     }
 
+    // changed favorite
     fun onChangeFavorite(isSelect: Boolean){
         val giphyGif = getDetailGif().value
         if(giphyGif != null){
