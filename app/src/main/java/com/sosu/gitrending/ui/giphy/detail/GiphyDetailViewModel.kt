@@ -2,15 +2,15 @@ package com.sosu.gitrending.ui.giphy.detail
 
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.ui.base.BaseViewModel
+import com.sosu.gitrending.usecase.giphy.GiphyGifDetailRepoImpl
 import com.sosu.gitrending.usecase.giphy.GiphyGifsFavoriteRepoImpl
-import com.sosu.gitrending.usecase.giphy.GiphyGifsRepoImpl
 import javax.inject.Inject
 
 /**
  * Created by hyunsuso on 2020/07/05.
  */
 class GiphyDetailViewModel @Inject constructor(
-    private val giphyGifsRepoImpl: GiphyGifsRepoImpl,
+    private val gifDetailRepoImpl: GiphyGifDetailRepoImpl,
     private val gifsFavoriteRepoImpl: GiphyGifsFavoriteRepoImpl
 ) : BaseViewModel<GiphyDetailNavigator>(){
 
@@ -18,14 +18,14 @@ class GiphyDetailViewModel @Inject constructor(
         val TAG = GiphyDetailViewModel::class.java.simpleName
     }
 
-    fun getGif() = giphyGifsRepoImpl.selectedGif
+    fun getDetailGif() = gifDetailRepoImpl.detailGif
 
     override fun getName(): String {
         return TAG
     }
 
     fun setGiphyGifDetail(giphyGif: GiphyGif){
-        giphyGifsRepoImpl.setGiphyGifDetail(giphyGif)
+        gifDetailRepoImpl.setGiphyGifDetail(giphyGif)
     }
 
     fun isFavorite(id : String) : Boolean{
@@ -33,7 +33,7 @@ class GiphyDetailViewModel @Inject constructor(
     }
 
     fun onChangeFavorite(isSelect: Boolean){
-        val giphyGif = getGif().value
+        val giphyGif = getDetailGif().value
         if(giphyGif != null){
             addCompositeDisposable(gifsFavoriteRepoImpl.setFavorite(giphyGif, isSelect, null))
         }

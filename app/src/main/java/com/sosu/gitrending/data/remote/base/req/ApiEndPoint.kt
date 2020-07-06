@@ -6,5 +6,6 @@ package com.sosu.gitrending.data.remote.base.req
 object ApiEndPoint {
 
     const val END_POINT_GET_GIHPY_TRENDINGS = "gifs/trending"
+    const val END_POINT_GET_GIHPY_TRENDINGS_RATING = "gifs/trending"
 
 }

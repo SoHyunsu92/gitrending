@@ -21,15 +21,30 @@ class GiphyTrendingRetrofitImpl @Inject constructor(
     private val retrofitApiImpl: RetrofitApiImpl
 ) : GiphyTrendingRetrofit {
 
-    override fun getTrendings(
+    override fun getTrendingGifs(
         offset: Int,
         resultListener: ApiResultListener<List<GiphyGif>>
     ): Disposable {
         return retrofitApiImpl
             .giphyRetrofit(GiphyTrendingApi::class.java, ApiHeader.getDefault())
-            .getTrendings(BuildConfig.key_api_giphy, offset, OFFSET_DEFAULT)
+            .getTrendingGifs(BuildConfig.key_api_giphy, offset, OFFSET_DEFAULT)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(GiphyApiCallback.ApiObservable(resultListener))
     }
+
+    override fun getTrendingRatingGifs(
+        rating: String,
+        offset: Int,
+        resultListener: ApiResultListener<List<GiphyGif>>
+    ): Disposable {
+        return retrofitApiImpl
+            .giphyRetrofit(GiphyTrendingApi::class.java, ApiHeader.getDefault())
+            .getTrendingRatingGifs(BuildConfig.key_api_giphy, rating, offset, OFFSET_DEFAULT)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(GiphyApiCallback.ApiObservable(resultListener))
+    }
+
+
 }

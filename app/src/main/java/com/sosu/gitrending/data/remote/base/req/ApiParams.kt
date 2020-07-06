@@ -8,4 +8,5 @@ object ApiParams {
     const val QUERY_api_key = "api_key"
     const val QUERY_limit = "limit"
     const val QUERY_offset = "offset"
+    const val QUERY_rating = "rating"
 }

@@ -87,7 +87,7 @@ class GiphyDetailActivity
         /*
         * changed gif data on repository
         * */
-        giphyDetailViewModel.getGif().observe(this, Observer {
+        giphyDetailViewModel.getDetailGif().observe(this, Observer {
             initInfo(it)
         })
     }

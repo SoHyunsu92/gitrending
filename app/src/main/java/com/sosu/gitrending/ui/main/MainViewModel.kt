@@ -1,10 +1,8 @@
 package com.sosu.gitrending.ui.main
 
-import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.data.remote.base.res.ApiStatusListener
 import com.sosu.gitrending.ui.base.BaseViewModel
 import com.sosu.gitrending.ui.base.rv.BaseRecyclerView.Companion.PAGE_START
-import com.sosu.gitrending.ui.component.list.giphy.GiphyGifsAdatper
 import com.sosu.gitrending.usecase.giphy.GiphyGifsFavoriteRepoImpl
 import com.sosu.gitrending.usecase.giphy.GiphyGifsRepoImpl
 import javax.inject.Inject
@@ -29,7 +27,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun getRemoteTrendings(offset : Int){
-        addCompositeDisposable(giphyGifsRepoImpl.getRemoteTrendings(offset, object : ApiStatusListener{
+        addCompositeDisposable(giphyGifsRepoImpl.getRemoteTrendingGifs(offset, object : ApiStatusListener{
             override fun onStarted() {
                 if(offset == PAGE_START){
                     getNavigator()?.onInitPageFlags()

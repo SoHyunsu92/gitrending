@@ -9,8 +9,14 @@ import io.reactivex.disposables.Disposable
  */
 interface GiphyTrendingRetrofit {
 
-    fun getTrendings(
-        page : Int,
+    fun getTrendingGifs(
+        offset: Int,
+        resultListener: ApiResultListener<List<GiphyGif>>
+    ): Disposable
+
+    fun getTrendingRatingGifs(
+        rating : String,
+        offset: Int,
         resultListener: ApiResultListener<List<GiphyGif>>
     ): Disposable
 }
