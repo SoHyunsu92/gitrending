@@ -43,7 +43,7 @@ android {
             manifestPlaceholders = [
                     appName: "DevGitrending",
             ]
-            buildConfigField("String", "api_giphy", "\"http://api.giphy.com/v1/\"")
+            buildConfigField("String", "api_giphy", "\"https://api.giphy.com/v1/\"")
 
             buildConfigField("String", "key_api_giphy", "\"O1uC1zhGnOcIbpgsb3ls1T8GD4djWHhQ\"")
         }
@@ -54,7 +54,7 @@ android {
             manifestPlaceholders = [
                     appName: "Gitrending",
             ]
-            buildConfigField("String", "api_giphy", "\"http://api.giphy.com/v1/\"")
+            buildConfigField("String", "api_giphy", "\"https://api.giphy.com/v1/\"")
 
             buildConfigField("String", "key_api_giphy", "\"O1uC1zhGnOcIbpgsb3ls1T8GD4djWHhQ\"")
         }
