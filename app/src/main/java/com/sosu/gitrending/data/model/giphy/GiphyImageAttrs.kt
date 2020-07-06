@@ -2,6 +2,7 @@ package com.sosu.gitrending.data.model.giphy
 
 import com.google.gson.annotations.SerializedName
 import com.sosu.gitrending.data.DataConstant
+import com.sosu.gitrending.data.model.app.DLog
 
 /**
  * Created by hyunsuso on 2020/07/04.
@@ -13,7 +14,6 @@ data class GiphyImageAttrs(
     @SerializedName(DataConstant.DATA_webp)          var webp : String? = "",
     @SerializedName(DataConstant.DATA_url)           var url : String? = ""
 ){
-    // todo type pair return
     fun getResUrl() : String? {
         if(url != null && url!!.isNotEmpty()){
             return url

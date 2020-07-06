@@ -1,6 +1,7 @@
 package com.sosu.gitrending
 
 import android.app.Application
+import com.facebook.drawee.backends.pipeline.Fresco
 import com.sosu.gitrending.di.inject.AppInjector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -21,6 +22,9 @@ class BaseApplication : Application(), HasAndroidInjector {
         // inject app component
         // app 에서 singleton 으로 사용할 modules inject
         AppInjector.init(this)
+
+        // fresco
+        Fresco.initialize(this)
     }
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector

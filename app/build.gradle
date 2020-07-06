@@ -109,4 +109,13 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glide"
     implementation 'jp.wasabeef:glide-transformations:4.1.0'
 
+    // facebook fresco
+    // your app's other dependencies
+    // For animated GIF support
+    // For WebP support, including animated WebP
+    // For WebP support, without animations
+    implementation "com.facebook.fresco:fresco:$fresco"
+    implementation "com.facebook.fresco:animated-gif:$fresco"
+    implementation "com.facebook.fresco:animated-webp:$fresco"
+    implementation "com.facebook.fresco:webpsupport:$fresco"
 }

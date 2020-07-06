@@ -3,15 +3,13 @@ package com.sosu.gitrending.ui.component.list.giphy
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import com.sosu.gitrending.R
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.ui.base.rv.BaseRecyclerViewAdapterImpl
+import com.sosu.gitrending.ui.component.custom.player.GifPlayerView
 import com.sosu.gitrending.utils.DeviceUtils
 import com.sosu.gitrending.utils.GlideUtils
 import com.sosu.gitrending.utils.GraphicUtils
-import com.sosu.gitrending.utils.ResourceUtils
 import javax.inject.Inject
 
 /**
@@ -40,12 +38,12 @@ class GiphyGifViewHolder @Inject constructor(
             DeviceUtils.getScreenWidth(context) / col
         }
 
-        private val gifImage by lazy<ImageView> { itemView.findViewById(R.id.image_giphy_gifs_adapter__gif) }
+        private val gifPlayerView by lazy<GifPlayerView> { itemView.findViewById(R.id.view_giphy_gifs_adapter__gif_player) }
 
         override fun onBind(item: GiphyGif) {
-            initImageHeight(item)
+            gifPlayerView.setResUrl(item.images?.previewGif?.getResUrl() ?: "")
 
-            GlideUtils.setSrcCenterCrop(context, gifImage, item.images?.previewGif?.getResUrl(), R.drawable.error_photo_30_w)
+            initImageHeight(item)
 
             initListener(item)
         }
@@ -56,11 +54,11 @@ class GiphyGifViewHolder @Inject constructor(
             val height = item.images?.previewGif?.height?.toFloat() ?: 1f
 
             // dynamic height
-            gifImage.layoutParams.height = GraphicUtils.getFrameHeightRatio(itemWidth, width, height)
+            gifPlayerView.layoutParams.height = GraphicUtils.getFrameHeightRatio(itemWidth, width, height)
         }
 
         private fun initListener(item : GiphyGif){
-            gifImage.setOnClickListener{
+            gifPlayerView.setOnClickListener{
                 _onClickItemListener?.onClickRoot(item)
             }
         }

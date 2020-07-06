@@ -5,8 +5,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.sosu.gitrending.BR
 import com.sosu.gitrending.R
-import com.sosu.gitrending.data.DataConstant.NULL_DATA
-import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.databinding.ActivityGiphyDetailBinding
 import com.sosu.gitrending.ui.base.BaseActivity
@@ -75,7 +73,7 @@ class GiphyDetailActivity
     private fun initInfo(giphyGif: GiphyGif){
         // todo error_photo_30_w 다른 이미지로 변경하기 색 있는 걸로
         // todo size에 따라서 height 변경되게 하기
-        GlideUtils.setSrcDefault(applicationContext, image_giphy_detail_activity__gif, giphyGif.images?.original?.getResUrl(), R.drawable.error_photo_30_w)
+        view_giphy_detail_activity__gif.setResUrl(giphyGif.images?.original?.getResUrl() ?: "")
 
         GlideUtils.setSrcCenterCrop(applicationContext, image_giphy_detail_activity__user, giphyGif.user?.profileUrl, R.drawable.error_photo_30_w)
 

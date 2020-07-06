@@ -6,6 +6,7 @@ buildscript {
     ext.retrofit2 = '2.8.1'
     ext.room = '2.2.5'
     ext.glide = '4.10.0'
+    ext.fresco = '2.0.0'
 
     repositories {
         google()

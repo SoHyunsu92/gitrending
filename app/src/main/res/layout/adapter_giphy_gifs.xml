@@ -4,11 +4,9 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/giphy_gifs_adapter__frame_margin_top">
 
-    <!-- todo type 에 따라 다른 view 사용하기 -->
-    <ImageView
-        android:id="@+id/image_giphy_gifs_adapter__gif"
+    <com.sosu.gitrending.ui.component.custom.player.GifPlayerView
+        android:id="@+id/view_giphy_gifs_adapter__gif_player"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"/>
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

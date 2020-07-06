@@ -14,9 +14,8 @@
 
         <!-- todo view padger -->
 
-        <!-- todo gif player -->
-        <ImageView
-            android:id="@+id/image_giphy_detail_activity__gif"
+        <com.sosu.gitrending.ui.component.custom.player.GifPlayerView
+            android:id="@+id/view_giphy_detail_activity__gif"
             android:layout_width="match_parent"
             android:layout_height="@dimen/giphy_detail_activity__gif_default_height"/>
 

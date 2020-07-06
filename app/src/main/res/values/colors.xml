@@ -13,4 +13,12 @@
     <color name="colorTextDisable">#7d7d85</color>
 
     <color name="colorIconPrimary">#ebe8f1</color>
+
+    <!--gif bg color-->
+    <color name="colorBGGif1">#e2f6a2</color>
+    <color name="colorBGGif2">#c7e8f3</color>
+    <color name="colorBGGif3">#ecb0b0</color>
+    <color name="colorBGGif4">#e6e6fa</color>
+    <color name="colorBGGif5">#b2cab6</color>
+
 </resources>
