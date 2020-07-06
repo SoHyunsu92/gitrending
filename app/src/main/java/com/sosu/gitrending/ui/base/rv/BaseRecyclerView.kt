@@ -1,6 +1,8 @@
 package com.sosu.gitrending.ui.base.rv
 
 import android.content.Context
+import android.view.View
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +21,8 @@ class BaseRecyclerView constructor(
         val TAG = BaseRecyclerView::class.java.simpleName
 
         const val PAGE_START = 0
+
+        const val PAGING_DIFF_HEIGHT = 300
     }
 
     enum class LayoutManagerType{
@@ -120,6 +124,36 @@ class BaseRecyclerView constructor(
     * set paging listener
     * */
     fun setOnPagingListener(pagingListener: BaseRecyclerView.PagingListener){
+        baseRecyclerViewPaging = object : BaseRecyclerViewPaging(){
+            override fun getPage(): Int {
+                return page
+            }
+
+            override fun isLastPage(): Boolean {
+                return isLastPage
+            }
+
+            override fun loadMoreItems(currentPage: Int) {
+                pagingListener.onNextPage(currentPage)
+            }
+        }
+        recyclerView.addOnScrollListener(baseRecyclerViewPaging!!)
+    }
+
+    /*
+    * set paging listener on nestedScrollView
+    * */
+    fun setOnPagingListener(nestedScrollView : NestedScrollView, pagingListener: BaseRecyclerView.PagingListener){
+        recyclerView.isNestedScrollingEnabled = false
+
+        nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            val childView: View = nestedScrollView.getChildAt(nestedScrollView.getChildCount() - 1)
+            val diff: Int = childView.bottom - (nestedScrollView.getHeight() + scrollY)
+            if (diff < PAGING_DIFF_HEIGHT && !isLastPage) {
+                pagingListener.onNextPage(page)
+            }
+        })
+
         baseRecyclerViewPaging = object : BaseRecyclerViewPaging(){
             override fun getPage(): Int {
                 return page

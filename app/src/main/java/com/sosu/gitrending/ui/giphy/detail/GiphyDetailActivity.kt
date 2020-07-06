@@ -116,9 +116,8 @@ class GiphyDetailActivity
             }
         })
 
-        // todo nested scroll
         // need to next rv paging
-        baseRecyclerView.setOnPagingListener(object : BaseRecyclerView.PagingListener {
+        baseRecyclerView.setOnPagingListener(nested_giphy_detail_activity__root, object : BaseRecyclerView.PagingListener {
             override fun onNextPage(currentPage: Int) {
                 giphyDetailViewModel.getRemoteTrendingRatingGifs(currentPage)
             }
