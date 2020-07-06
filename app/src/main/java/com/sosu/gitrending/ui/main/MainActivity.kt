@@ -69,7 +69,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         gifsAdapter.setCol(baseRecyclerView.getGridCol())
         gifsAdapter.setOnClickItemListener(object : GiphyGifViewHolder.OnClickItemListener{
             override fun onClickRoot(giphyGif: GiphyGif) {
-                startActivity(startActivityImpl.openGiphyDetailActivity(giphyGif.id))
+                startActivity(startActivityImpl.openGiphyDetailActivity(giphyGif))
             }
         })
 

@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.sosu.gitrending.data.model.alert.ToastMessage
+import com.sosu.gitrending.data.model.app.DConfig
 import com.sosu.gitrending.di.viewmodel.ViewModelFactory
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -70,5 +72,18 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel<*>>
     // get data binding
     fun getViewDataBinding(): DB{
         return viewDataBinding
+    }
+
+    fun showToast(toastMessage: ToastMessage){
+        if(toastMessage.message.isEmpty()){
+            return
+        } else if(!DConfig.isDebugMode() && toastMessage.isDebug){
+            return
+        } else if(isFinishing){
+            return
+        }
+        runOnUiThread {
+            Toast.makeText(applicationContext, toastMessage.message, Toast.LENGTH_SHORT).show()
+        }
     }
 }

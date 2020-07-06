@@ -12,12 +12,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- todo view padger -->
-
         <com.sosu.gitrending.ui.component.custom.player.GifPlayerView
             android:id="@+id/view_giphy_detail_activity__gif"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/giphy_detail_activity__gif_default_height"/>
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="match_parent"

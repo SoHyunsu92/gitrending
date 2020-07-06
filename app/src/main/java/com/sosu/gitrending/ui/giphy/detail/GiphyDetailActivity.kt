@@ -5,11 +5,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.sosu.gitrending.BR
 import com.sosu.gitrending.R
+import com.sosu.gitrending.data.model.alert.ToastMessage
+import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.databinding.ActivityGiphyDetailBinding
 import com.sosu.gitrending.ui.base.BaseActivity
-import com.sosu.gitrending.usecase.ui.StartActivityImpl.Companion.EXTRA_ID
+import com.sosu.gitrending.usecase.ui.StartActivityImpl.Companion.EXTRA_GIPHY_GIF
+import com.sosu.gitrending.utils.DeviceUtils
 import com.sosu.gitrending.utils.GlideUtils
+import com.sosu.gitrending.utils.GraphicUtils
+import com.sosu.gitrending.utils.GsonUtils
 import kotlinx.android.synthetic.main.activity_giphy_detail.*
 
 /**
@@ -56,9 +61,15 @@ class GiphyDetailActivity
     }
 
     private fun onParseIntentExtra(){
-        val id = intent.getStringExtra(EXTRA_ID)
+        val giphyGif = GsonUtils.jsonStringToObject(intent.getStringExtra(EXTRA_GIPHY_GIF) ?: "", GiphyGif::class.java)
 
-        onSelectTrendingById(id)
+        if(giphyGif == null){
+            showToast(ToastMessage(getString(R.string.str_not_exist_info), false))
+            finish()
+            return
+        }
+
+        setGiphyGifDetail(giphyGif)
     }
 
     private fun initLiveDataListener(){
@@ -71,8 +82,8 @@ class GiphyDetailActivity
     }
 
     private fun initInfo(giphyGif: GiphyGif){
-        // todo error_photo_30_w 다른 이미지로 변경하기 색 있는 걸로
-        // todo size에 따라서 height 변경되게 하기
+        initGifHeight(giphyGif)
+
         view_giphy_detail_activity__gif.setResUrl(giphyGif.images?.original?.getResUrl() ?: "")
 
         GlideUtils.setSrcCenterCrop(applicationContext, image_giphy_detail_activity__user, giphyGif.user?.profileUrl, R.drawable.error_photo_30_w)
@@ -83,8 +94,18 @@ class GiphyDetailActivity
         btn_activity_giphy_detail__favorite.isSelected = giphyDetailViewModel.isFavorite(giphyGif.id)
     }
 
-    private fun onSelectTrendingById(id: String){
-        giphyDetailViewModel.onSelectTrendingById(id)
+    private fun initGifHeight(giphyGif: GiphyGif){
+        val deviceWidth = DeviceUtils.getScreenWidth(applicationContext)
+
+        // image frame
+        val width = giphyGif.images?.previewGif?.width?.toFloat() ?: 1f
+        val height = giphyGif.images?.previewGif?.height?.toFloat() ?: 1f
+
+        view_giphy_detail_activity__gif.initHeight(GraphicUtils.getFrameHeightRatio(deviceWidth, width, height))
+    }
+
+    private fun setGiphyGifDetail(giphyGif: GiphyGif){
+        giphyDetailViewModel.setGiphyGifDetail(giphyGif)
     }
 
     override fun onClick(v: View?) {

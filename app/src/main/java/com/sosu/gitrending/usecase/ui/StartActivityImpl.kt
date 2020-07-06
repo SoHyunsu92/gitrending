@@ -2,7 +2,6 @@ package com.sosu.gitrending.usecase.ui
 
 import android.content.Context
 import android.content.Intent
-import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.ui.giphy.detail.GiphyDetailActivity
 import com.sosu.gitrending.ui.main.MainActivity
@@ -19,7 +18,7 @@ class StartActivityImpl @Inject constructor(
 ) : StartActivity{
 
     companion object{
-        const val EXTRA_ID = "ie"
+        const val EXTRA_GIPHY_GIF = "giphy_gif"
     }
 
     override fun openMainActivity() : Intent{
@@ -29,10 +28,10 @@ class StartActivityImpl @Inject constructor(
         return intent
     }
 
-    override fun openGiphyDetailActivity(id : String): Intent {
+    override fun openGiphyDetailActivity(giphyGif: GiphyGif): Intent {
         val intent = Intent(context, GiphyDetailActivity::class.java)
 
-        intent.putExtra(EXTRA_ID, id)
+        intent.putExtra(EXTRA_GIPHY_GIF, GsonUtils.objectToJsonString(giphyGif))
 
         return intent
     }

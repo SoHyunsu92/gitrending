@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sosu.gitrending.data.DataConstant.NULL_DATA
 import com.sosu.gitrending.data.DataConstant.NULL_INT
+import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.data.remote.base.res.ApiResultListener
 import com.sosu.gitrending.data.remote.base.res.ApiStatusListener
 import com.sosu.gitrending.data.remote.giphy.GiphyTrendingRetrofitImpl
+import com.sosu.gitrending.ui.giphy.detail.GiphyDetailActivity
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -66,18 +68,7 @@ class GiphyGifsRepoImpl @Inject constructor(
         return disposable
     }
 
-    override fun onSelectTrendingById(id : String) {
-        if(_gifs.value != null){
-            for(item in _gifs.value!!){
-                if(item.id == id){
-                    // find
-                    _selectedGif.value = item
-                    return
-                }
-            }
-        }
-
-        // empty data
-        _selectedGif.value = GiphyGif()
+    override fun setGiphyGifDetail(giphyGif: GiphyGif) {
+        _selectedGif.value = giphyGif
     }
 }

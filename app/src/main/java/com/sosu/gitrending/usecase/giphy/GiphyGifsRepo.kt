@@ -1,5 +1,6 @@
 package com.sosu.gitrending.usecase.giphy
 
+import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.data.remote.base.res.ApiStatusListener
 import io.reactivex.disposables.Disposable
 
@@ -14,6 +15,6 @@ interface GiphyGifsRepo{
         apiStatusListener: ApiStatusListener?
     ) : Disposable
 
-    // select giphy gif trending
-    fun onSelectTrendingById(id : String)
+    // set GiphyGif detail
+    fun setGiphyGifDetail(giphyGif : GiphyGif)
 }

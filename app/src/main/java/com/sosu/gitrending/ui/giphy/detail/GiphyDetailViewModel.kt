@@ -1,5 +1,6 @@
 package com.sosu.gitrending.ui.giphy.detail
 
+import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.ui.base.BaseViewModel
 import com.sosu.gitrending.usecase.giphy.GiphyGifsFavoriteRepoImpl
 import com.sosu.gitrending.usecase.giphy.GiphyGifsRepoImpl
@@ -23,8 +24,8 @@ class GiphyDetailViewModel @Inject constructor(
         return TAG
     }
 
-    fun onSelectTrendingById(id : String){
-        giphyGifsRepoImpl.onSelectTrendingById(id)
+    fun setGiphyGifDetail(giphyGif: GiphyGif){
+        giphyGifsRepoImpl.setGiphyGifDetail(giphyGif)
     }
 
     fun isFavorite(id : String) : Boolean{
