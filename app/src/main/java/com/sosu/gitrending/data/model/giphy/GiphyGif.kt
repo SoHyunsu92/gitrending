@@ -63,7 +63,13 @@ data class GiphyGif(
     }
 
     fun getUsername(context: Context) : String{
-        return username ?: context.getString(R.string.str_username)
+        if(!username.isNullOrEmpty()){
+            return username ?: context.getString(R.string.str_username)
+        } else if(!user?.username.isNullOrEmpty()){
+            return user?.username ?: context.getString(R.string.str_username)
+        } else{
+            return context.getString(R.string.str_username)
+        }
     }
 
     override fun hashCode(): Int {
@@ -87,6 +93,11 @@ data class GiphyGif(
 * */
 var GiphyGif.toGiphyGifFavoriteEntity : GiphyGifFavoriteEntity
     get() {
+        if(user == null){
+            user = User(username = username)
+        } else if(user?.username.isNullOrEmpty()){
+            user?.username = username
+        }
         return GiphyGifFavoriteEntity(
             id = id,
             type = type,
