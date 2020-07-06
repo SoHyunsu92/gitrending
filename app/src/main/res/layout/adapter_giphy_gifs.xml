@@ -7,6 +7,6 @@
     <com.sosu.gitrending.ui.component.custom.player.GifPlayerView
         android:id="@+id/view_giphy_gifs_adapter__gif_player"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

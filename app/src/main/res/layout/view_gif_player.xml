@@ -2,17 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container_gif_player_view__root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/webp_gif_player_view__gif"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/image_gif_player_view__gif"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"/>
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>

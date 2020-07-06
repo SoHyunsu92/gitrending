@@ -19,7 +19,6 @@ import javax.inject.Inject
 
 /**
  * Created by hyunsuso on 2020/07/06.
- * // todo image 빈 부분 이슈
  */
 class GifPlayerView : BaseView {
 
@@ -76,6 +75,11 @@ class GifPlayerView : BaseView {
                 FrescoUtils.showWebpImage(webp_gif_player_view__gif, resUrl)
             }
         }
+    }
+
+    fun initHeight(height : Int){
+        webp_gif_player_view__gif.layoutParams.height = height
+        image_gif_player_view__gif.layoutParams.height = height
     }
 
     fun setResUrl(resUrl : String){

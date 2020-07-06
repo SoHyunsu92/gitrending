@@ -10,6 +10,7 @@ import com.sosu.gitrending.ui.component.custom.player.GifPlayerView
 import com.sosu.gitrending.utils.DeviceUtils
 import com.sosu.gitrending.utils.GlideUtils
 import com.sosu.gitrending.utils.GraphicUtils
+import kotlinx.android.synthetic.main.view_gif_player.view.*
 import javax.inject.Inject
 
 /**
@@ -41,9 +42,9 @@ class GiphyGifViewHolder @Inject constructor(
         private val gifPlayerView by lazy<GifPlayerView> { itemView.findViewById(R.id.view_giphy_gifs_adapter__gif_player) }
 
         override fun onBind(item: GiphyGif) {
-            gifPlayerView.setResUrl(item.images?.previewGif?.getResUrl() ?: "")
-
             initImageHeight(item)
+
+            gifPlayerView.setResUrl(item.images?.previewGif?.getResUrl() ?: "")
 
             initListener(item)
         }
@@ -53,8 +54,7 @@ class GiphyGifViewHolder @Inject constructor(
             val width = item.images?.previewGif?.width?.toFloat() ?: 1f
             val height = item.images?.previewGif?.height?.toFloat() ?: 1f
 
-            // dynamic height
-            gifPlayerView.layoutParams.height = GraphicUtils.getFrameHeightRatio(itemWidth, width, height)
+            gifPlayerView.initHeight(GraphicUtils.getFrameHeightRatio(itemWidth, width, height))
         }
 
         private fun initListener(item : GiphyGif){
@@ -63,8 +63,6 @@ class GiphyGifViewHolder @Inject constructor(
             }
         }
     }
-
-    // todo 바탕색 랜덤으로 해서 밑배경 보여주기
 
     interface OnClickItemListener{
         fun onClickRoot(giphyGif: GiphyGif)
