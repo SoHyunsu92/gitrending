@@ -33,7 +33,7 @@ class GiphyDetailActivity
         ViewModelProvider(this, viewModelFactory).get(GiphyDetailViewModel::class.java)
     }
 
-    private var isChangedFavorite  = false;
+    private var isChangedFavorite  = false
 
     override fun getName(): String {
         return TAG
@@ -97,10 +97,12 @@ class GiphyDetailActivity
 
         view_giphy_detail_activity__gif.setResUrl(giphyGif.images?.original?.getResUrl() ?: "")
 
-        GlideUtils.setSrcCenterCrop(applicationContext, image_giphy_detail_activity__user, giphyGif.user?.profileUrl, R.drawable.error_photo_30_w)
+        GlideUtils.setSrcCenterCrop(applicationContext, image_giphy_detail_activity__user, giphyGif.user?.avatarUrl, R.drawable.error_photo_30_w)
 
         text_activity_giphy_detail__title.text = giphyGif.getTitle(applicationContext)
         text_activity_giphy_detail__username.text = giphyGif.getUsername(applicationContext)
+
+        image_activity_giphy_detail__auth.visibility = if(giphyGif.user?.isVerified == true) View.VISIBLE else View.GONE
 
         btn_activity_giphy_detail__favorite.isSelected = giphyDetailViewModel.isFavorite(giphyGif.id)
     }

@@ -48,14 +48,30 @@
                         android:ellipsize="end"
                         android:lines="1"/>
 
-                    <TextView
-                        style="@style/TextColorTPrimaryPt10"
-                        android:id="@+id/text_activity_giphy_detail__username"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/giphy_detail_activity__username_margin_top"
-                        android:ellipsize="end"
-                        android:lines="1"/>
+                        android:layout_marginTop="@dimen/giphy_detail_activity__user_info_margin_top"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/TextColorTPrimaryPt10"
+                            android:id="@+id/text_activity_giphy_detail__username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:lines="1" />
+
+                        <ImageView
+                            android:id="@+id/image_activity_giphy_detail__auth"
+                            android:layout_width="@dimen/giphy_detail_activity__auth_frame"
+                            android:layout_height="@dimen/giphy_detail_activity__auth_frame"
+                            android:layout_marginStart="@dimen/giphy_detail_activity__auth_margin_start"
+                            android:background="@drawable/ic_auth_16_c"
+                            android:visibility="gone"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

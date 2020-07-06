@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.sosu.gitrending.data.DataConstant.DATA_avatar_url
 import com.sosu.gitrending.data.DataConstant.DATA_banner_url
 import com.sosu.gitrending.data.DataConstant.DATA_display_name
+import com.sosu.gitrending.data.DataConstant.DATA_is_verified
 import com.sosu.gitrending.data.DataConstant.DATA_profile_url
 import com.sosu.gitrending.data.DataConstant.DATA_username
 
@@ -15,7 +16,9 @@ data class User(
     @SerializedName(DATA_banner_url)                    var bannerUrl : String? = "",
     @SerializedName(DATA_profile_url)                   var profileUrl : String? = "",
     @SerializedName(DATA_username)                      var username : String? = "",
-    @SerializedName(DATA_display_name)                  var displayName : String? = ""
+    @SerializedName(DATA_display_name)                  var displayName : String? = "",
+    @SerializedName(DATA_is_verified)                   var isVerified : Boolean = false
+
 ) {
 
 }

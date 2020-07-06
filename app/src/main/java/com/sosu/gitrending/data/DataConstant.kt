@@ -22,6 +22,7 @@ object DataConstant {
     const val DATA_mp4 = "mp4"
     const val DATA_msg = "msg"
     const val DATA_id = "id"
+    const val DATA_is_verified = "is_verified"
     const val DATA_images = "images"
     const val DATA_import_datetime = "import_datetime"
     const val DATA_offset = "offset"

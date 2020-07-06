@@ -26,6 +26,7 @@ class GifPlayerView : BaseView {
         val TAG = GifPlayerView::class.java.simpleName
     }
 
+    /* todo mp4 */
     private val bgColor = intArrayOf(
         R.color.colorBGGif1,
         R.color.colorBGGif2,
