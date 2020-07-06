@@ -18,6 +18,10 @@ class StartActivityImpl @Inject constructor(
 ) : StartActivity{
 
     companion object{
+        const val REQUEST_CODE_GIPHY_DETAIL = 3001
+
+        const val RESULT_CODE_REFRESH_FAVORITE = 300
+
         const val EXTRA_GIPHY_GIF = "giphy_gif"
     }
 

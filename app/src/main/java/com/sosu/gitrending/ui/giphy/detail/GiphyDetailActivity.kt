@@ -1,16 +1,17 @@
 package com.sosu.gitrending.ui.giphy.detail
 
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.sosu.gitrending.BR
 import com.sosu.gitrending.R
 import com.sosu.gitrending.data.model.alert.ToastMessage
-import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.databinding.ActivityGiphyDetailBinding
 import com.sosu.gitrending.ui.base.BaseActivity
 import com.sosu.gitrending.usecase.ui.StartActivityImpl.Companion.EXTRA_GIPHY_GIF
+import com.sosu.gitrending.usecase.ui.StartActivityImpl.Companion.RESULT_CODE_REFRESH_FAVORITE
 import com.sosu.gitrending.utils.DeviceUtils
 import com.sosu.gitrending.utils.GlideUtils
 import com.sosu.gitrending.utils.GraphicUtils
@@ -31,6 +32,8 @@ class GiphyDetailActivity
     private val giphyDetailViewModel by lazy {
         ViewModelProvider(this, viewModelFactory).get(GiphyDetailViewModel::class.java)
     }
+
+    private var isChangedFavorite  = false;
 
     override fun getName(): String {
         return TAG
@@ -58,6 +61,14 @@ class GiphyDetailActivity
         initLiveDataListener()
 
         onParseIntentExtra()
+    }
+
+    override fun finish() {
+        // favorite 변경된 경우, 갱신하기
+        if(isChangedFavorite){
+            onReturnIntent()
+        }
+        super.finish()
     }
 
     private fun onParseIntentExtra(){
@@ -108,6 +119,11 @@ class GiphyDetailActivity
         giphyDetailViewModel.setGiphyGifDetail(giphyGif)
     }
 
+    private fun onReturnIntent() {
+        val returnIntent = Intent()
+        setResult(RESULT_CODE_REFRESH_FAVORITE, returnIntent)
+    }
+
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btn_activity_giphy_detail__favorite ->{
@@ -116,10 +132,11 @@ class GiphyDetailActivity
         }
     }
 
-    // todo 리스트 화면으로 가면 갱신할 수 있게 해주기
     private fun onClickedFavorite(){
         val selecting = !btn_activity_giphy_detail__favorite.isSelected
         btn_activity_giphy_detail__favorite.isSelected = selecting
+
+        isChangedFavorite = !isChangedFavorite
 
         giphyDetailViewModel.onChangeFavorite(selecting)
     }

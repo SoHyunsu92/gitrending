@@ -1,10 +1,12 @@
 package com.sosu.gitrending.ui.main
 
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sosu.gitrending.BR
 import com.sosu.gitrending.R
+import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.databinding.ActivityMainBinding
 import com.sosu.gitrending.ui.base.BaseActivity
@@ -13,6 +15,8 @@ import com.sosu.gitrending.ui.component.list.giphy.GiphyGifViewHolder
 import com.sosu.gitrending.ui.component.list.giphy.GiphyGifsAdatper
 import com.sosu.gitrending.ui.component.list.giphy.GiphyGifsAdatper.Companion.GRID_MAIN_HOME
 import com.sosu.gitrending.usecase.ui.StartActivityImpl
+import com.sosu.gitrending.usecase.ui.StartActivityImpl.Companion.REQUEST_CODE_GIPHY_DETAIL
+import com.sosu.gitrending.usecase.ui.StartActivityImpl.Companion.RESULT_CODE_REFRESH_FAVORITE
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -61,6 +65,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         mainViewModel.onShowTrending()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        
+        if(requestCode == REQUEST_CODE_GIPHY_DETAIL){
+            if(resultCode == RESULT_CODE_REFRESH_FAVORITE && isShowedFavorite()){
+                text_main_activity__favorite.performClick()
+            }
+        }
+    }
+
     // gifs recycler view 초기화
     private fun initGifsRecyclerView(){
         baseRecyclerView.initLinearLayoutManager(LinearLayoutManager.VERTICAL)
@@ -69,7 +83,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         gifsAdapter.setCol(baseRecyclerView.getGridCol())
         gifsAdapter.setOnClickItemListener(object : GiphyGifViewHolder.OnClickItemListener{
             override fun onClickRoot(giphyGif: GiphyGif) {
-                startActivity(startActivityImpl.openGiphyDetailActivity(giphyGif))
+                startActivityForResult(startActivityImpl.openGiphyDetailActivity(giphyGif), REQUEST_CODE_GIPHY_DETAIL)
             }
         })
 
@@ -96,6 +110,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     private fun initBottomTab(){
         text_main_activity__trending.isSelected = false
         text_main_activity__favorite.isSelected = false
+    }
+
+    private fun isShowedFavorite() : Boolean{
+        return text_main_activity__favorite.isSelected
     }
 
     // showed trending
