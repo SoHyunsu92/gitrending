@@ -95,7 +95,9 @@ class GiphyDetailActivity
     private fun initInfo(giphyGif: GiphyGif){
         initGifHeight(giphyGif)
 
-        view_giphy_detail_activity__gif.setResUrl(giphyGif.images?.original?.getResUrl() ?: "")
+        // todo
+        // view_giphy_detail_activity__gif.setResUrl(giphyGif.images?.original?.getResUrl() ?: "")
+        view_giphy_detail_activity__gif.setResUrl(giphyGif.images?.original?.mp4 ?: "")
 
         GlideUtils.setSrcCenterCrop(applicationContext, image_giphy_detail_activity__user, giphyGif.user?.avatarUrl, R.drawable.error_photo_30_w)
 
@@ -142,4 +144,6 @@ class GiphyDetailActivity
 
         giphyDetailViewModel.onChangeFavorite(selecting)
     }
+
+    // todo related gifs
 }

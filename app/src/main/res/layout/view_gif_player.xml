@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <VideoView
+        android:id="@+id/video_gif_player_view__gif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/webp_gif_player_view__gif"
         android:layout_width="match_parent"

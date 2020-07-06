@@ -10,9 +10,11 @@ import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.ui.base.BaseView
 import com.sosu.gitrending.utils.FileUtils
 import com.sosu.gitrending.utils.FileUtils.EXE_GIF
+import com.sosu.gitrending.utils.FileUtils.EXE_MP4
 import com.sosu.gitrending.utils.FileUtils.EXE_WEBP
 import com.sosu.gitrending.utils.FrescoUtils
 import com.sosu.gitrending.utils.GlideUtils
+import com.sosu.gitrending.utils.VideoViewUtils
 import kotlinx.android.synthetic.main.view_gif_player.view.*
 import java.util.*
 import javax.inject.Inject
@@ -26,7 +28,6 @@ class GifPlayerView : BaseView {
         val TAG = GifPlayerView::class.java.simpleName
     }
 
-    /* todo mp4 */
     private val bgColor = intArrayOf(
         R.color.colorBGGif1,
         R.color.colorBGGif2,
@@ -61,6 +62,7 @@ class GifPlayerView : BaseView {
     private fun initViewVisible(){
         image_gif_player_view__gif.visibility = View.GONE
         webp_gif_player_view__gif.visibility = View.GONE
+        video_gif_player_view__gif.visibility = View.GONE
     }
 
     private fun onShowGif(resUrl: String){
@@ -75,12 +77,17 @@ class GifPlayerView : BaseView {
                 webp_gif_player_view__gif.visibility = View.VISIBLE
                 FrescoUtils.showWebpImage(webp_gif_player_view__gif, resUrl)
             }
+            EXE_MP4 -> {
+                video_gif_player_view__gif.visibility = View.VISIBLE
+                VideoViewUtils.onPlayGif(context, video_gif_player_view__gif, resUrl)
+            }
         }
     }
 
     fun initHeight(height : Int){
-        webp_gif_player_view__gif.layoutParams.height = height
         image_gif_player_view__gif.layoutParams.height = height
+        webp_gif_player_view__gif.layoutParams.height = height
+        video_gif_player_view__gif.layoutParams.height = height
     }
 
     fun setResUrl(resUrl : String){
