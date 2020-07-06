@@ -1,13 +1,10 @@
 package com.sosu.gitrending.ui.base
 
 import android.content.Context
-import android.content.res.Configuration
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.RelativeLayout
-import android.widget.Toast
 
 /**
  * Created by hyunsuso on 2020/07/06.

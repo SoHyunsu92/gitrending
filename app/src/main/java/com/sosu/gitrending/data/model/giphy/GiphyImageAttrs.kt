@@ -2,7 +2,6 @@ package com.sosu.gitrending.data.model.giphy
 
 import com.google.gson.annotations.SerializedName
 import com.sosu.gitrending.data.DataConstant
-import com.sosu.gitrending.data.model.app.DLog
 
 /**
  * Created by hyunsuso on 2020/07/04.

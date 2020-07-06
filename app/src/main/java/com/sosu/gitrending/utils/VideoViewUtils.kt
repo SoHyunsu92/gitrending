@@ -1,11 +1,7 @@
 package com.sosu.gitrending.utils
 
-import android.R
 import android.content.Context
-import android.media.MediaPlayer.OnCompletionListener
 import android.net.Uri
-import android.widget.MediaController
-import android.widget.Toast
 import android.widget.VideoView
 
 /**

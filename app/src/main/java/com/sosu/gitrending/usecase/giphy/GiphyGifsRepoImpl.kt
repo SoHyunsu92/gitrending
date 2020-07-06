@@ -9,7 +9,6 @@ import com.sosu.gitrending.data.remote.base.res.ApiStatusListener
 import com.sosu.gitrending.data.remote.giphy.GiphyTrendingRetrofitImpl
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Created by hyunsuso on 2020/07/04.

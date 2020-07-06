@@ -2,15 +2,12 @@ package com.sosu.gitrending.ui.component.list.giphy
 
 import android.content.Context
 import android.view.View
-import android.widget.ImageView
 import com.sosu.gitrending.R
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.ui.base.rv.BaseRecyclerViewAdapterImpl
 import com.sosu.gitrending.ui.component.custom.player.GifPlayerView
 import com.sosu.gitrending.utils.DeviceUtils
-import com.sosu.gitrending.utils.GlideUtils
 import com.sosu.gitrending.utils.GraphicUtils
-import kotlinx.android.synthetic.main.view_gif_player.view.*
 import javax.inject.Inject
 
 /**

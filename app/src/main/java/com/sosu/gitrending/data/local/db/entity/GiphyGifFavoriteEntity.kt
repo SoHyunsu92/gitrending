@@ -4,10 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import com.sosu.gitrending.data.DataConstant
 import com.sosu.gitrending.data.DataConstant.DATA_id
 import com.sosu.gitrending.data.DataConstant.DATA_images
-import com.sosu.gitrending.data.DataConstant.DATA_slug
 import com.sosu.gitrending.data.DataConstant.DATA_title
 import com.sosu.gitrending.data.DataConstant.DATA_type
 import com.sosu.gitrending.data.DataConstant.DATA_user
