@@ -4,12 +4,18 @@ import android.content.Intent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sosu.gitrending.BR
 import com.sosu.gitrending.R
 import com.sosu.gitrending.data.model.alert.ToastMessage
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.databinding.ActivityGiphyDetailBinding
 import com.sosu.gitrending.ui.base.BaseActivity
+import com.sosu.gitrending.ui.base.rv.BaseRecyclerView
+import com.sosu.gitrending.ui.base.rv.BaseRecyclerView.Companion.PAGE_START
+import com.sosu.gitrending.ui.component.list.giphy.GiphyGifViewHolder
+import com.sosu.gitrending.ui.component.list.giphy.GiphyGifsAdatper
+import com.sosu.gitrending.usecase.ui.StartActivityImpl
 import com.sosu.gitrending.usecase.ui.StartActivityImpl.Companion.EXTRA_GIPHY_GIF
 import com.sosu.gitrending.usecase.ui.StartActivityImpl.Companion.RESULT_CODE_REFRESH_FAVORITE
 import com.sosu.gitrending.utils.DeviceUtils
@@ -17,6 +23,8 @@ import com.sosu.gitrending.utils.GlideUtils
 import com.sosu.gitrending.utils.GraphicUtils
 import com.sosu.gitrending.utils.GsonUtils
 import kotlinx.android.synthetic.main.activity_giphy_detail.*
+import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 /**
  * Created by hyunsuso on 2020/07/05.
@@ -32,6 +40,15 @@ class GiphyDetailActivity
     private val giphyDetailViewModel by lazy {
         ViewModelProvider(this, viewModelFactory).get(GiphyDetailViewModel::class.java)
     }
+
+    @Inject
+    lateinit var gifsAdapter : GiphyGifsAdatper
+    private val baseRecyclerView by lazy {
+        BaseRecyclerView(applicationContext, rv_giphy_detail_activity__rating_gifs, gifsAdapter)
+    }
+
+    @Inject
+    lateinit var startActivityImpl: StartActivityImpl
 
     private var isChangedFavorite  = false
 
@@ -53,12 +70,14 @@ class GiphyDetailActivity
 
     override fun initView() {
         btn_activity_giphy_detail__favorite.setOnClickListener(this)
+
+        initGifsRecyclerView()
     }
 
     override fun initAfterBinding() {
         giphyDetailViewModel.setNavigator(this)
 
-        initLiveDataListener()
+        initDetailGifListener()
 
         onParseIntentExtra()
     }
@@ -81,9 +100,39 @@ class GiphyDetailActivity
         }
 
         setGiphyGifDetail(giphyGif)
+
+        giphyDetailViewModel.getRemoteTrendingRatingGifs(PAGE_START)
     }
 
-    private fun initLiveDataListener(){
+    // gifs recycler view 초기화
+    private fun initGifsRecyclerView(){
+        baseRecyclerView.initLinearLayoutManager(LinearLayoutManager.VERTICAL)
+        baseRecyclerView.initStaggeredGridLayoutManager(GiphyGifsAdatper.GRID_MAIN_HOME)
+
+        gifsAdapter.setCol(baseRecyclerView.getGridCol())
+        gifsAdapter.setOnClickItemListener(object : GiphyGifViewHolder.OnClickItemListener{
+            override fun onClickRoot(giphyGif: GiphyGif) {
+                startActivity(startActivityImpl.openGiphyDetailActivity(giphyGif))
+            }
+        })
+
+        // todo nested scroll
+        // need to next rv paging
+        baseRecyclerView.setOnPagingListener(object : BaseRecyclerView.PagingListener {
+            override fun onNextPage(currentPage: Int) {
+                giphyDetailViewModel.getRemoteTrendingRatingGifs(currentPage)
+            }
+        })
+
+        /*
+        * changed gifs data on repository
+        * */
+        giphyDetailViewModel.getRatingGifs().observe(this, Observer {
+            gifsAdapter.addAllItem(it)
+        })
+    }
+
+    private fun initDetailGifListener(){
         /*
         * changed gif data on repository
         * */
@@ -92,12 +141,11 @@ class GiphyDetailActivity
         })
     }
 
+    // show data
     private fun initInfo(giphyGif: GiphyGif){
         initGifHeight(giphyGif)
 
-        // todo
-        // view_giphy_detail_activity__gif.setResUrl(giphyGif.images?.original?.getResUrl() ?: "")
-        view_giphy_detail_activity__gif.setResUrl(giphyGif.images?.original?.mp4 ?: "")
+        view_giphy_detail_activity__gif.setResUrl(giphyGif.images?.original?.getResUrl() ?: "")
 
         GlideUtils.setSrcCenterCrop(applicationContext, image_giphy_detail_activity__user, giphyGif.user?.avatarUrl, R.drawable.error_photo_30_w)
 
@@ -109,6 +157,7 @@ class GiphyDetailActivity
         btn_activity_giphy_detail__favorite.isSelected = giphyDetailViewModel.isFavorite(giphyGif.id)
     }
 
+    // gif height fix
     private fun initGifHeight(giphyGif: GiphyGif){
         val deviceWidth = DeviceUtils.getScreenWidth(applicationContext)
 
@@ -119,10 +168,13 @@ class GiphyDetailActivity
         view_giphy_detail_activity__gif.initHeight(GraphicUtils.getFrameHeightRatio(deviceWidth, width, height))
     }
 
+    // set detail gif data
     private fun setGiphyGifDetail(giphyGif: GiphyGif){
         giphyDetailViewModel.setGiphyGifDetail(giphyGif)
     }
 
+    // return activity result code
+    // for refresh item of preActivity
     private fun onReturnIntent() {
         val returnIntent = Intent()
         setResult(RESULT_CODE_REFRESH_FAVORITE, returnIntent)
@@ -136,6 +188,7 @@ class GiphyDetailActivity
         }
     }
 
+    // click favorite
     private fun onClickedFavorite(){
         val selecting = !btn_activity_giphy_detail__favorite.isSelected
         btn_activity_giphy_detail__favorite.isSelected = selecting
@@ -145,5 +198,18 @@ class GiphyDetailActivity
         giphyDetailViewModel.onChangeFavorite(selecting)
     }
 
-    // todo related gifs
+    // page 데이터 초기화
+    override fun onInitPageFlags() {
+        baseRecyclerView.initPageFlags()
+    }
+
+    // 요청한 패이지 완료 했고, 다음 페이지 값 설정
+    override fun onCompletedNextPage(nextPage: Int) {
+        baseRecyclerView.onCompletedNextPage(nextPage)
+    }
+
+    // 페이징을 모두 끝냈다.
+    override fun onLastPage() {
+        baseRecyclerView.onLastPage()
+    }
 }

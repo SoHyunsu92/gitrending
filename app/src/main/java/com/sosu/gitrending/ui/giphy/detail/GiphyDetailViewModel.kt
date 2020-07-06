@@ -1,7 +1,9 @@
 package com.sosu.gitrending.ui.giphy.detail
 
 import com.sosu.gitrending.data.model.giphy.GiphyGif
+import com.sosu.gitrending.data.remote.base.res.ApiStatusListener
 import com.sosu.gitrending.ui.base.BaseViewModel
+import com.sosu.gitrending.ui.base.rv.BaseRecyclerView
 import com.sosu.gitrending.usecase.giphy.GiphyGifDetailRepoImpl
 import com.sosu.gitrending.usecase.giphy.GiphyGifsFavoriteRepoImpl
 import javax.inject.Inject
@@ -18,10 +20,34 @@ class GiphyDetailViewModel @Inject constructor(
         val TAG = GiphyDetailViewModel::class.java.simpleName
     }
 
+    fun getRatingGifs() = gifDetailRepoImpl.ratingGifs
     fun getDetailGif() = gifDetailRepoImpl.detailGif
+
+    // detail gif rating
+    fun getDetailGifRating() = gifDetailRepoImpl.detailGif.value?.rating ?: ""
 
     override fun getName(): String {
         return TAG
+    }
+
+    fun getRemoteTrendingRatingGifs(offset : Int){
+        addCompositeDisposable(gifDetailRepoImpl.getRemoteTrendingRatingGifs(getDetailGifRating(), offset, object :
+            ApiStatusListener {
+            override fun onStarted() {
+                if(offset == BaseRecyclerView.PAGE_START){
+                    getNavigator()?.onInitPageFlags()
+                }
+            }
+
+            override fun onCompleted(error: String) {
+                if(error.isNotEmpty()){
+                    getNavigator()?.onLastPage()
+                } else{
+                    getNavigator()?.onCompletedNextPage(offset + 1)
+                }
+            }
+
+        }))
     }
 
     fun setGiphyGifDetail(giphyGif: GiphyGif){

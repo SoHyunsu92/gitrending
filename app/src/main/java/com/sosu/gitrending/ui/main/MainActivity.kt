@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sosu.gitrending.BR
 import com.sosu.gitrending.R
-import com.sosu.gitrending.data.model.app.DLog
 import com.sosu.gitrending.data.model.giphy.GiphyGif
 import com.sosu.gitrending.databinding.ActivityMainBinding
 import com.sosu.gitrending.ui.base.BaseActivity
@@ -90,7 +89,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         // need to next rv paging
         baseRecyclerView.setOnPagingListener(object : BaseRecyclerView.PagingListener {
             override fun onNextPage(currentPage: Int) {
-                mainViewModel.getRemoteTrendings(currentPage)
+                mainViewModel.getRemoteTrendingGifs(currentPage)
             }
         })
 

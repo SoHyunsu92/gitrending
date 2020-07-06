@@ -26,7 +26,7 @@ class MainViewModel @Inject constructor(
         return TAG
     }
 
-    fun getRemoteTrendings(offset : Int){
+    fun getRemoteTrendingGifs(offset : Int){
         addCompositeDisposable(giphyGifsRepoImpl.getRemoteTrendingGifs(offset, object : ApiStatusListener{
             override fun onStarted() {
                 if(offset == PAGE_START){
@@ -55,7 +55,7 @@ class MainViewModel @Inject constructor(
     fun onShowTrending(){
         getNavigator()?.onShowedTrending()
 
-        getRemoteTrendings(PAGE_START)
+        getRemoteTrendingGifs(PAGE_START)
     }
 
     fun onShowFavorite(){

@@ -5,4 +5,8 @@ package com.sosu.gitrending.ui.giphy.detail
  */
 interface GiphyDetailNavigator {
 
+    // rv
+    fun onInitPageFlags()
+    fun onCompletedNextPage(nextPage : Int)
+    fun onLastPage()
 }
