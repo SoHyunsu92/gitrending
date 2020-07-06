@@ -41,7 +41,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        style="@style/TextColorTPrimaryPt14B"
+                        style="@style/TextColorTPrimaryPt16B"
                         android:id="@+id/text_activity_giphy_detail__title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                         android:gravity="center_vertical">
 
                         <TextView
-                            style="@style/TextColorTPrimaryPt10"
+                            style="@style/TextColorTPrimaryPt12"
                             android:id="@+id/text_activity_giphy_detail__username"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

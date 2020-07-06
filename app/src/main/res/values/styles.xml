@@ -29,6 +29,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextColorTPrimaryPt12">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
     <style name="TextColorTPrimaryPt10">
         <item name="android:textSize">10dp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
