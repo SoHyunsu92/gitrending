@@ -67,7 +67,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        
+
         if(requestCode == REQUEST_CODE_GIPHY_DETAIL){
             if(resultCode == RESULT_CODE_REFRESH_FAVORITE && isShowedFavorite()){
                 text_main_activity__favorite.performClick()

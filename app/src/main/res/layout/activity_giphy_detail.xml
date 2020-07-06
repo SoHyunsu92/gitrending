@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -7,64 +7,70 @@
             type="com.sosu.gitrending.ui.giphy.detail.GiphyDetailViewModel" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <com.sosu.gitrending.ui.component.custom.player.GifPlayerView
-            android:id="@+id/view_giphy_detail_activity__gif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/giphy_detail_activity__info_container_padding_vertical"
-            android:paddingHorizontal="@dimen/giphy_detail_activity__info_container_padding_horizontal"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/image_giphy_detail_activity__user"
-                android:layout_width="@dimen/giphy_detail_activity__user_thumb_frame"
-                android:layout_height="@dimen/giphy_detail_activity__user_thumb_frame"/>
+            <com.sosu.gitrending.ui.component.custom.player.GifPlayerView
+                android:id="@+id/view_giphy_detail_activity__gif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingHorizontal="@dimen/giphy_detail_activity__info_text_container_padding_horizontal"
-                android:orientation="vertical">
+                android:paddingVertical="@dimen/giphy_detail_activity__info_container_padding_vertical"
+                android:paddingHorizontal="@dimen/giphy_detail_activity__info_container_padding_horizontal"
+                android:orientation="horizontal">
 
-                <TextView
-                    style="@style/TextColorTPrimaryPt14B"
-                    android:id="@+id/text_activity_giphy_detail__title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:lines="1"/>
+                <ImageView
+                    android:id="@+id/image_giphy_detail_activity__user"
+                    android:layout_width="@dimen/giphy_detail_activity__user_thumb_frame"
+                    android:layout_height="@dimen/giphy_detail_activity__user_thumb_frame"/>
 
-                <TextView
-                    style="@style/TextColorTPrimaryPt10"
-                    android:id="@+id/text_activity_giphy_detail__username"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/giphy_detail_activity__username_margin_top"
-                    android:ellipsize="end"
-                    android:lines="1"/>
+                    android:layout_weight="1"
+                    android:paddingHorizontal="@dimen/giphy_detail_activity__info_text_container_padding_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextColorTPrimaryPt14B"
+                        android:id="@+id/text_activity_giphy_detail__title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:lines="1"/>
+
+                    <TextView
+                        style="@style/TextColorTPrimaryPt10"
+                        android:id="@+id/text_activity_giphy_detail__username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/giphy_detail_activity__username_margin_top"
+                        android:ellipsize="end"
+                        android:lines="1"/>
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btn_activity_giphy_detail__favorite"
+                    android:layout_width="@dimen/giphy_detail_activity__favorite_frame"
+                    android:layout_height="@dimen/giphy_detail_activity__favorite_frame"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_favorite_32"/>
 
             </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/btn_activity_giphy_detail__favorite"
-                android:layout_width="@dimen/giphy_detail_activity__favorite_frame"
-                android:layout_height="@dimen/giphy_detail_activity__favorite_frame"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_favorite_32"/>
 
         </LinearLayout>
 
-
-    </LinearLayout>
+    </ScrollView>
 
 </layout>
